@@ -14,6 +14,7 @@
     <h:form id="formModelos">
       <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update="tabelaModelos"
                        style="margin-bottom: 8px;"/>
+
       <p:dataTable id="tabelaModelos" var="modelo" value="#{modeloCtrl.readAll()}" paginator="true">
         <f:facet name="header">Modelos</f:facet>
         <p:column headerText="ID">#{modelo.id}</p:column>
@@ -25,7 +26,7 @@
 
     <p:dialog id="modalCadastro" modal="true" widgetVar="cadastro">
       <f:facet name="header">Cadastro Modelo</f:facet>
-      
+
       <h:form id="formCadastro">
         <p:panelGrid columns="2">
           <h:outputText value="Nome"/>
@@ -45,7 +46,7 @@
         </p:panelGrid>
 
         <p:commandButton value="Cadastrar" action="#{modeloCtrl.create()}"
-                         oncomplete="PF('cadastro').hide()" update=":formModelos :modalCadastro :growl"/>
+                         oncomplete="PF('cadastro').hide()" update=":formModelos :growl :modalCadastro"/>
         <p:commandButton value="Cancelar" oncomplete="PF('cadastro').hide()"/>
       </h:form>
     </p:dialog>
