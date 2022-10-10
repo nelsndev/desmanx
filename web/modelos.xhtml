@@ -14,8 +14,11 @@
     <h:form id="formModelos">
       <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update="tabelaModelos"
                        style="margin-bottom: 8px;"/>
+      <p:commandButton value="Alterar" oncomplete="PF('alteracao').show()" update="tabelaModelos :modalAlteracao"
+                       style="margin-bottom: 8px; margin-left: 10px;"/>
 
-      <p:dataTable id="tabelaModelos" var="modelo" value="#{modeloCtrl.readAll()}" paginator="true">
+      <p:dataTable id="tabelaModelos" var="modelo" value="#{modeloCtrl.readAll()}" paginator="true"
+                   selectionMode="single" selection="#{modeloCtrl.selecionado}" rowKey="#{modelo.id}">
         <f:facet name="header">Modelos</f:facet>
         <p:column headerText="ID">#{modelo.id}</p:column>
         <p:column headerText="Nome">#{modelo.nome}</p:column>
@@ -48,6 +51,36 @@
         <p:commandButton value="Cadastrar" action="#{modeloCtrl.create()}"
                          oncomplete="PF('cadastro').hide()" update=":formModelos :growl :modalCadastro"/>
         <p:commandButton value="Cancelar" oncomplete="PF('cadastro').hide()"/>
+      </h:form>
+    </p:dialog>
+
+    <p:dialog id="modalAlteracao" modal="true" widgetVar="alteracao">
+      <f:facet name="header">Alteração Modelo</f:facet>
+
+      <h:form id="formAlteracao">
+        <p:panelGrid columns="2">
+          <h:outputText value="ID"/>
+          <h:outputText value="#{modeloCtrl.selecionado.id}"/>
+
+          <h:outputText value="Nome"/>
+          <p:inputText value="#{modeloCtrl.selecionado.nome}"/>
+
+          <h:outputText value="Fabricante"/>
+          <p:inputText value="#{modeloCtrl.selecionado.fabricante}"/>
+
+          <h:outputText value="Tipo"/>
+          <p:inputText value="#{modeloCtrl.selecionado.tipo}"/>
+
+          <h:outputText value="Potência do Motor"/>
+          <p:inputText value="#{modeloCtrl.selecionado.motorPotencia}"/>
+
+          <h:outputText value="Cilindrada do Motor"/>
+          <p:inputText value="#{modeloCtrl.selecionado.motorCilindrada}"/>
+        </p:panelGrid>
+
+        <p:commandButton value="Alterar" action="#{modeloCtrl.update()}"
+                         oncomplete="PF('alteracao').hide()" update=":formModelos :growl :modalAlteracao"/>
+        <p:commandButton value="Cancelar" oncomplete="PF('alteracao').hide()"/>
       </h:form>
     </p:dialog>
   </h:body>

@@ -13,13 +13,23 @@ import javax.faces.context.FacesContext;
 public class ModeloController {
 
     private Modelo modelo;
+    private Modelo selecionado;
 
     public ModeloController() {
         modelo = new Modelo();
+        selecionado = new Modelo();
     }
 
     public Modelo getModelo() {
         return modelo;
+    }
+
+    public Modelo getSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(Modelo selecionado) {
+        this.selecionado = selecionado;
     }
 
     public void setModelo(Modelo modelo) {
@@ -31,6 +41,12 @@ public class ModeloController {
         this.modelo = new Modelo();
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Modelo cadastrado com sucesso!"));
+    }
+
+    public void update() {
+        ManagerDao.getInstance().update(this.selecionado);
+        FacesContext.getCurrentInstance()
+            .addMessage(null, new FacesMessage("Modelo alterado com sucesso!"));
     }
 
     public List<Modelo> readAll() {
