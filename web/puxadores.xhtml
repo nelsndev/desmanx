@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <h:head>
+    <title>Puxadores</title>
+  </h:head>
+
+  <h:body>
+    <p:growl id="growl" life="3000"/>
+
+    <h:form id="formPuxadores">
+      <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update=":modalCadastro"
+                       style="margin-bottom: 8px;"/>
+      <p:commandButton value="Visualizar" oncomplete="PF('visualizacao').show()" update=":modalVisualizacao"
+                       style="margin-bottom: 8px; margin-left: 10px;"/>
+      <p:commandButton value="Alterar" oncomplete="PF('alteracao').show()" update=":modalAlteracao"
+                       style="margin-bottom: 8px; margin-left: 10px;"/>
+      <p:commandButton value="Deletar" action="#{puxadorCtrl.delete()}" update=":formPuxadores:tabelaPuxadores :growl"
+                       style="margin-bottom: 8px; margin-left: 10px;">
+        <p:confirm message="Deseja realmente deletar o puxador selecionado?"/>
+      </p:commandButton>
+
+      <p:dataTable id="tabelaPuxadores" var="puxador" value="#{puxadorCtrl.readAll()}" paginator="true"
+                   selectionMode="single" selection="#{puxadorCtrl.selecionado}" rowKey="#{puxador.id}">
+        <f:facet name="header">Puxadores</f:facet>
+        <p:column headerText="ID">#{puxador.id}</p:column>
+        <p:column headerText="CPF">#{puxador.cpf}</p:column>
+        <p:column headerText="Nome">#{puxador.nome}</p:column>
+        <p:column headerText="Codinome">#{puxador.codinome}</p:column>
+      </p:dataTable>
+    </h:form>
+
+    <p:confirmDialog global="true">
+      <h:form>
+        <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
+        <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
+      </h:form>
+    </p:confirmDialog>
+
+    <p:dialog id="modalCadastro" modal="true" widgetVar="cadastro" resizable="false">
+      <f:facet name="header">Cadastro Puxador</f:facet>
+
+      <h:form id="formCadastro">
+        <p:panelGrid columns="2">
+          <h:outputText value="CPF"/>
+          <p:inputText value="#{puxadorCtrl.puxador.cpf}" required="true"
+                       requiredMessage="Campo cpf obrigatório"/>
+
+          <h:outputText value="Nome"/>
+          <p:inputText value="#{puxadorCtrl.puxador.nome}" required="true"
+                       requiredMessage="Campo nome obrigatório"/>
+
+          <h:outputText value="Codinome"/>
+          <p:inputText value="#{puxadorCtrl.puxador.codinome}"/>
+
+          <h:outputText value="Telefone"/>
+          <p:inputText value="#{puxadorCtrl.puxador.telefone}"/>
+
+          <h:outputText value="Endereço"/>
+          <p:inputText value="#{puxadorCtrl.puxador.endereco}"/>
+
+          <h:outputText value="Endereço da Mãe"/>
+          <p:inputText value="#{puxadorCtrl.puxador.enderecoMae}"/>
+
+          <h:outputText value="Número de prisões"/>
+          <p:inputText value="#{puxadorCtrl.puxador.quantidadePrisoes}"/>
+
+          <h:outputText value="Especialidade de Roubo"/>
+          <p:inputText value="#{puxadorCtrl.puxador.especialidadeRoubo}"/>
+
+          <h:outputText value="Anos de experiência"/>
+          <p:inputText value="#{puxadorCtrl.puxador.anosExperiencia}"/>
+        </p:panelGrid>
+
+        <p:commandButton value="Cadastrar" action="#{puxadorCtrl.create()}"
+                         oncomplete="PF('cadastro').hide()" update=":formPuxadores:tabelaPuxadores :growl"/>
+        <p:commandButton value="Cancelar" oncomplete="PF('cadastro').hide()"/>
+      </h:form>
+    </p:dialog>
+
+    <p:dialog id="modalVisualizacao" modal="true" widgetVar="visualizacao" resizable="false">
+      <f:facet name="header">Visualização Puxador</f:facet>
+
+      <h:form id="formVisualizacao">
+        <p:panelGrid columns="2">
+          <h:outputText value="ID"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.id}"/>
+
+          <h:outputText value="CPF"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.cpf}"/>
+
+          <h:outputText value="Nome"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.nome}"/>
+
+          <h:outputText value="Codinome"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.codinome}"/>
+
+          <h:outputText value="Telefone"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.telefone}"/>
+
+          <h:outputText value="Endereço"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.endereco}"/>
+
+          <h:outputText value="Endereço da Mãe"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.enderecoMae}"/>
+
+          <h:outputText value="Número de prisões"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.quantidadePrisoes}"/>
+
+          <h:outputText value="Especialidade de Roubo"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.especialidadeRoubo}"/>
+
+          <h:outputText value="Anos de experiência"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.anosExperiencia}"/>
+        </p:panelGrid>
+      </h:form>
+    </p:dialog>
+
+    <p:dialog id="modalAlteracao" modal="true" widgetVar="alteracao" resizable="false">
+      <f:facet name="header">Alteração Puxador</f:facet>
+
+      <h:form id="formAlteracao">
+        <p:panelGrid columns="2">
+          <h:outputText value="ID"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.id}"/>
+
+          <h:outputText value="CPF"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.cpf}" required="true"
+                       requiredMessage="Campo cpf obrigatório"/>
+
+          <h:outputText value="Nome"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.nome}" required="true"
+                       requiredMessage="Campo nome obrigatório"/>
+
+          <h:outputText value="Codinome"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.codinome}"/>
+
+          <h:outputText value="Telefone"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.telefone}"/>
+
+          <h:outputText value="Endereço"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.endereco}"/>
+
+          <h:outputText value="Endereço da Mãe"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.enderecoMae}"/>
+
+          <h:outputText value="Número de prisões"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.quantidadePrisoes}"/>
+
+          <h:outputText value="Especialidade de Roubo"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.especialidadeRoubo}"/>
+
+          <h:outputText value="Anos de experiência"/>
+          <p:inputText value="#{puxadorCtrl.selecionado.anosExperiencia}"/>
+        </p:panelGrid>
+
+        <p:commandButton value="Alterar" action="#{puxadorCtrl.update()}"
+                         oncomplete="PF('alteracao').hide()" update=":formPuxadores:tabelaPuxadores :growl">
+          <p:confirm message="Deseja realmente alterar o puxador selecionado?"/>
+        </p:commandButton>
+        <p:commandButton value="Cancelar" oncomplete="PF('alteracao').hide()"/>
+      </h:form>
+    </p:dialog>
+  </h:body>
+</html>
