@@ -49,6 +49,12 @@ public class ModeloController {
             .addMessage(null, new FacesMessage("Modelo alterado com sucesso!"));
     }
 
+    public void delete() {
+        ManagerDao.getInstance().delete(this.selecionado);
+        FacesContext.getCurrentInstance()
+            .addMessage(null, new FacesMessage("Modelo deletado com sucesso!"));
+    }
+
     public List<Modelo> readAll() {
         return ManagerDao.getInstance()
             .read("SELECT m FROM Modelo m", Modelo.class);

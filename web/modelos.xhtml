@@ -18,6 +18,10 @@
                        style="margin-bottom: 8px; margin-left: 10px;"/>
       <p:commandButton value="Alterar" oncomplete="PF('alteracao').show()" update=":modalAlteracao"
                        style="margin-bottom: 8px; margin-left: 10px;"/>
+      <p:commandButton value="Deletar" action="#{modeloCtrl.delete()}" update=":formModelos:tabelaModelos :growl"
+                       style="margin-bottom: 8px; margin-left: 10px;">
+        <p:confirm message="Deseja realmente deletar o modelo selecionado?"/>
+      </p:commandButton>
 
       <p:dataTable id="tabelaModelos" var="modelo" value="#{modeloCtrl.readAll()}" paginator="true"
                    selectionMode="single" selection="#{modeloCtrl.selecionado}" rowKey="#{modelo.id}">
@@ -28,6 +32,13 @@
         <p:column headerText="Tipo">#{modelo.tipo}</p:column>
       </p:dataTable>
     </h:form>
+
+    <p:confirmDialog global="true">
+      <h:form>
+        <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
+        <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
+      </h:form>
+    </p:confirmDialog>
 
     <p:dialog id="modalCadastro" modal="true" widgetVar="cadastro" resizable="false">
       <f:facet name="header">Cadastro Modelo</f:facet>
