@@ -118,7 +118,9 @@
         </p:panelGrid>
 
         <p:commandButton value="Alterar" action="#{modeloCtrl.update()}"
-                         oncomplete="PF('alteracao').hide()" update=":formModelos:tabelaModelos :growl"/>
+                         oncomplete="PF('alteracao').hide()" update=":formModelos:tabelaModelos :growl">
+          <p:confirm message="Deseja realmente alterar o modelo selecionado?"/>
+        </p:commandButton>
         <p:commandButton value="Cancelar" oncomplete="PF('alteracao').hide()"/>
       </h:form>
     </p:dialog>
