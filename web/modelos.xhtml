@@ -12,7 +12,7 @@
     <p:growl id="growl" life="2000"/>
 
     <h:form id="formModelos">
-      <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()"
+      <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update=":modalCadastro"
                        style="margin-bottom: 8px;"/>
       <p:commandButton value="Visualizar" oncomplete="PF('visualizacao').show()" update=":modalVisualizacao"
                        style="margin-bottom: 8px; margin-left: 10px;"/>
@@ -51,7 +51,7 @@
         </p:panelGrid>
 
         <p:commandButton value="Cadastrar" action="#{modeloCtrl.create()}"
-                         oncomplete="PF('cadastro').hide()" update=":formModelos:tabelaModelos :growl :modalCadastro"/>
+                         oncomplete="PF('cadastro').hide()" update=":formModelos:tabelaModelos :growl"/>
         <p:commandButton value="Cancelar" oncomplete="PF('cadastro').hide()"/>
       </h:form>
     </p:dialog>
