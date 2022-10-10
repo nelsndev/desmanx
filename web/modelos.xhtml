@@ -9,7 +9,7 @@
   </h:head>
 
   <h:body>
-    <p:growl id="growl" life="2000"/>
+    <p:growl id="growl" life="3000"/>
 
     <h:form id="formModelos">
       <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update=":modalCadastro"
@@ -46,10 +46,12 @@
       <h:form id="formCadastro">
         <p:panelGrid columns="2">
           <h:outputText value="Nome"/>
-          <p:inputText value="#{modeloCtrl.modelo.nome}"/>
+          <p:inputText id="nome" value="#{modeloCtrl.modelo.nome}" required="true"
+                       requiredMessage="Campo nome obrigatório"/>
 
           <h:outputText value="Fabricante"/>
-          <p:inputText value="#{modeloCtrl.modelo.fabricante}"/>
+          <p:inputText id="fabricante" value="#{modeloCtrl.modelo.fabricante}" required="true"
+                       requiredMessage="Campo fabricante obrigatório"/>
 
           <h:outputText value="Tipo"/>
           <p:inputText value="#{modeloCtrl.modelo.tipo}"/>
@@ -102,10 +104,12 @@
           <h:outputText value="#{modeloCtrl.selecionado.id}"/>
 
           <h:outputText value="Nome"/>
-          <p:inputText value="#{modeloCtrl.selecionado.nome}"/>
+          <p:inputText value="#{modeloCtrl.selecionado.nome}" required="true"
+                       requiredMessage="Campo nome obrigatório"/>
 
           <h:outputText value="Fabricante"/>
-          <p:inputText value="#{modeloCtrl.selecionado.fabricante}"/>
+          <p:inputText value="#{modeloCtrl.selecionado.fabricante}" required="true"
+                       requiredMessage="Campo fabricante obrigatório"/>
 
           <h:outputText value="Tipo"/>
           <p:inputText value="#{modeloCtrl.selecionado.tipo}"/>
