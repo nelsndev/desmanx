@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  <h:head>
+    <title>Pecas</title>
+  </h:head>
+
+  <h:body>
+    <p:growl id="growl" life="3000"/>
+
+    <h:form id="formPecas">
+      <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update=":modalCadastro"
+                       style="margin-bottom: 8px;"/>
+      <p:commandButton value="Visualizar" oncomplete="PF('visualizacao').show()" update=":modalVisualizacao"
+                       style="margin-bottom: 8px; margin-left: 10px;"/>
+      <p:commandButton value="Alterar" oncomplete="PF('alteracao').show()" update=":modalAlteracao"
+                       style="margin-bottom: 8px; margin-left: 10px;"/>
+      <p:commandButton value="Deletar" action="#{pecaCtrl.delete()}" update=":formPecas:tabelaPecas :growl"
+                       style="margin-bottom: 8px; margin-left: 10px;">
+        <p:confirm message="Deseja realmente deletar a peça selecionada?"/>
+      </p:commandButton>
+
+      <p:dataTable id="tabelaPecas" var="peca" value="#{pecaCtrl.readAll()}" paginator="true"
+                   selectionMode="single" selection="#{pecaCtrl.selecionada}" rowKey="#{peca.id}">
+        <f:facet name="header">Peças</f:facet>
+        <p:column headerText="ID">#{peca.id}</p:column>
+        <p:column headerText="Nome">#{peca.nome}</p:column>
+        <p:column headerText="Função">#{peca.funcao}</p:column>
+        <p:column headerText="Tipo">#{peca.tipo}</p:column>
+      </p:dataTable>
+    </h:form>
+
+    <p:confirmDialog global="true">
+      <h:form>
+        <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
+        <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
+      </h:form>
+    </p:confirmDialog>
+
+    <p:dialog id="modalCadastro" modal="true" widgetVar="cadastro" resizable="false">
+      <f:facet name="header">Cadastro Peça</f:facet>
+
+      <h:form id="formCadastro">
+        <p:panelGrid columns="2">
+          <h:outputText value="Nome"/>
+          <p:inputText id="nome" value="#{pecaCtrl.peca.nome}" required="true"
+                       requiredMessage="Campo nome obrigatório"/>
+
+          <h:outputText value="Função"/>
+          <p:inputText value="#{pecaCtrl.peca.funcao}"/>
+
+          <h:outputText value="Tipo"/>
+          <p:inputText value="#{pecaCtrl.peca.tipo}"/>
+
+          <h:outputText value="Observação"/>
+          <p:editor value="#{pecaCtrl.peca.observacao}"/>
+        </p:panelGrid>
+
+        <p:commandButton value="Cadastrar" action="#{pecaCtrl.create()}"
+                         oncomplete="PF('cadastro').hide()" update=":formPecas:tabelaPecas :growl"/>
+        <p:commandButton value="Cancelar" oncomplete="PF('cadastro').hide()"/>
+      </h:form>
+    </p:dialog>
+
+    <p:dialog id="modalVisualizacao" modal="true" widgetVar="visualizacao" resizable="false">
+      <f:facet name="header">Visualização Peça</f:facet>
+
+      <h:form id="formVisualizacao">
+        <p:panelGrid columns="2">
+          <h:outputText value="ID"/>
+          <h:outputText value="#{pecaCtrl.selecionada.id}"/>
+
+          <h:outputText value="Nome"/>
+          <h:outputText value="#{pecaCtrl.selecionada.nome}"/>
+
+          <h:outputText value="Função"/>
+          <h:outputText value="#{pecaCtrl.selecionada.funcao}"/>
+
+          <h:outputText value="Tipo"/>
+          <h:outputText value="#{pecaCtrl.selecionada.tipo}"/>
+
+          <h:outputText value="Observação"/>
+          <h:outputText value="#{pecaCtrl.selecionada.observacao}"/>
+        </p:panelGrid>
+      </h:form>
+    </p:dialog>
+
+    <p:dialog id="modalAlteracao" modal="true" widgetVar="alteracao" resizable="false">
+      <f:facet name="header">Alteração Peça</f:facet>
+
+      <h:form id="formAlteracao">
+        <p:panelGrid columns="2">
+          <h:outputText value="ID"/>
+          <h:outputText value="#{pecaCtrl.selecionada.id}"/>
+
+          <h:outputText value="Nome"/>
+          <p:inputText value="#{pecaCtrl.selecionada.nome}" required="true"
+                       requiredMessage="Campo nome obrigatório"/>
+
+          <h:outputText value="Função"/>
+          <p:inputText value="#{pecaCtrl.selecionada.funcao}" required="true"/>
+
+          <h:outputText value="Tipo"/>
+          <p:inputText value="#{pecaCtrl.selecionada.tipo}"/>
+
+          <h:outputText value="Observação"/>
+          <p:editor value="#{pecaCtrl.selecionada.observacao}"/>
+        </p:panelGrid>
+
+        <p:commandButton value="Alterar" action="#{pecaCtrl.update()}"
+                         oncomplete="PF('alteracao').hide()" update=":formPecas:tabelaPecas :growl">
+          <p:confirm message="Deseja realmente alterar a peça selecionada?"/>
+        </p:commandButton>
+        <p:commandButton value="Cancelar" oncomplete="PF('alteracao').hide()"/>
+      </h:form>
+    </p:dialog>
+  </h:body>
+</html>
