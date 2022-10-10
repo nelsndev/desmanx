@@ -14,6 +14,8 @@
     <h:form id="formModelos">
       <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update="tabelaModelos"
                        style="margin-bottom: 8px;"/>
+      <p:commandButton value="Visualizar" oncomplete="PF('visualizacao').show()" update=":modalVisualizacao"
+                       style="margin-bottom: 8px; margin-left: 10px;"/>
       <p:commandButton value="Alterar" oncomplete="PF('alteracao').show()" update="tabelaModelos :modalAlteracao"
                        style="margin-bottom: 8px; margin-left: 10px;"/>
 
@@ -51,6 +53,32 @@
         <p:commandButton value="Cadastrar" action="#{modeloCtrl.create()}"
                          oncomplete="PF('cadastro').hide()" update=":formModelos :growl :modalCadastro"/>
         <p:commandButton value="Cancelar" oncomplete="PF('cadastro').hide()"/>
+      </h:form>
+    </p:dialog>
+
+    <p:dialog id="modalVisualizacao" modal="true" widgetVar="visualizacao">
+      <f:facet name="header">Visualização Modelo</f:facet>
+
+      <h:form id="formVisualizacao">
+        <p:panelGrid columns="2">
+          <h:outputText value="ID"/>
+          <h:outputText value="#{modeloCtrl.selecionado.id}"/>
+
+          <h:outputText value="Nome"/>
+          <h:outputText value="#{modeloCtrl.selecionado.nome}"/>
+
+          <h:outputText value="Fabricante"/>
+          <h:outputText value="#{modeloCtrl.selecionado.fabricante}"/>
+
+          <h:outputText value="Tipo"/>
+          <h:outputText value="#{modeloCtrl.selecionado.tipo}"/>
+
+          <h:outputText value="Potência do Motor"/>
+          <h:outputText value="#{modeloCtrl.selecionado.motorPotencia}"/>
+
+          <h:outputText value="Cilindrada do Motor"/>
+          <h:outputText value="#{modeloCtrl.selecionado.motorCilindrada}"/>
+        </p:panelGrid>
       </h:form>
     </p:dialog>
 
