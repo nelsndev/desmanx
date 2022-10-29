@@ -3,6 +3,7 @@ package br.edu.ifpe.recife.controller;
 import br.edu.ifpe.recife.model.dao.ManagerDao;
 import br.edu.ifpe.recife.model.negocio.Puxador;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +16,8 @@ public class PuxadorController {
     private Puxador puxador;
     private Puxador selecionado;
 
-    public PuxadorController() {
+    @PostConstruct
+    public void init() {
         puxador = new Puxador();
         selecionado = new Puxador();
     }

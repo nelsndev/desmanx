@@ -3,6 +3,7 @@ package br.edu.ifpe.recife.controller;
 import br.edu.ifpe.recife.model.dao.ManagerDao;
 import br.edu.ifpe.recife.model.negocio.Peca;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +16,8 @@ public class PecaController {
     private Peca peca;
     private Peca selecionada;
 
-    public PecaController() {
+    @PostConstruct
+    public void init() {
         peca = new Peca();
         selecionada = new Peca();
     }

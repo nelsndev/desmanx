@@ -3,6 +3,7 @@ package br.edu.ifpe.recife.controller;
 import br.edu.ifpe.recife.model.dao.ManagerDao;
 import br.edu.ifpe.recife.model.negocio.Modelo;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,9 +16,10 @@ public class ModeloController {
     private Modelo modelo;
     private Modelo selecionado;
 
-    public ModeloController() {
-        modelo = new Modelo();
-        selecionado = new Modelo();
+    @PostConstruct
+    public void init() {
+        this.modelo = new Modelo();
+        this.selecionado = new Modelo();
     }
 
     public Modelo getModelo() {
