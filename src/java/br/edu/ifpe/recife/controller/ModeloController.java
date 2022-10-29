@@ -19,7 +19,7 @@ public class ModeloController {
     @PostConstruct
     public void init() {
         this.modelo = new Modelo();
-        this.selecionado = new Modelo();
+        this.selecionado = null;
     }
 
     public Modelo getModelo() {

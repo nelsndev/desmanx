@@ -18,8 +18,8 @@ public class PecaController {
 
     @PostConstruct
     public void init() {
-        peca = new Peca();
-        selecionada = new Peca();
+        this.peca = new Peca();
+        this.selecionada = null;
     }
 
     public Peca getPeca() {

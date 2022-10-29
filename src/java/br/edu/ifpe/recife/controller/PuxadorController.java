@@ -18,8 +18,8 @@ public class PuxadorController {
 
     @PostConstruct
     public void init() {
-        puxador = new Puxador();
-        selecionado = new Puxador();
+        this.puxador = new Puxador();
+        this.selecionado = null;
     }
 
     public Puxador getPuxador() {
