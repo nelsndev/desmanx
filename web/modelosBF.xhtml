@@ -36,6 +36,10 @@
             <p:confirm message="Deseja realmente alterar este modelo?" icon="pi pi-info-circle"/>
           </p:commandButton>
 
+          <p:commandButton value="Deletar" action="#{modeloCtrl.delete()}" update=":formModelos">
+            <f:setPropertyActionListener value="#{modelo}" target="#{modeloCtrl.selecionado}"/>
+            <p:confirm message="Deseja realmente deletar este modelo?" icon="pi pi-exclamation-triangle"/>
+          </p:commandButton>
         </b:dataTableColumn>
       </b:dataTable>
     </b:form>
