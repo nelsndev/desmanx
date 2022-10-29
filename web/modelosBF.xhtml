@@ -29,8 +29,13 @@
             <f:setPropertyActionListener value="#{modelo}" target="#{modeloCtrl.selecionado}"/>
           </p:commandButton>
 
-          <p:commandButton  value="Alterar" style="display: inline-block; margin-right: 8px"></p:commandButton>
-          <p:commandButton value="Deletar"></p:commandButton>
+          <p:commandButton  value="Alterar" style="display: inline-block; margin-right: 8px"
+                            oncomplete="$('.alteracao').modal('show')" update=":modalAlteracao"
+                            ajax="true">
+            <f:setPropertyActionListener value="#{modelo}" target="#{modeloCtrl.selecionado}"/>
+            <p:confirm message="Deseja realmente alterar este modelo?" icon="pi pi-info-circle"/>
+          </p:commandButton>
+
         </b:dataTableColumn>
       </b:dataTable>
     </b:form>
@@ -68,5 +73,28 @@
         </h:panelGrid>
       </b:form>
     </b:modal>
+
+    <b:modal id="modalAlteracao" class="alteracao" title="Modelo Alteração">
+      <b:form>
+        <h:outputText value="Nome"/>
+        <b:inputText value="#{modeloCtrl.selecionado.nome}"/>
+
+        <h:outputText value="Fabricante"/>
+        <b:inputText value="#{modeloCtrl.selecionado.fabricante}"/>
+
+        <h:outputText value="Tipo"/>
+        <b:inputText value="#{modeloCtrl.selecionado.tipo}"/>
+
+        <b:commandButton value="Alterar" action="#{modeloCtrl.update()}"/>
+        <b:button value="Cancelar" dismiss="modal" style="display: inline-block; margin-left: 10px;"/>
+      </b:form>
+    </b:modal>
+
+    <p:confirmDialog global="true">
+      <h:form>
+        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes"/>
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+      </h:form>
+    </p:confirmDialog>
   </h:body>
 </html>
