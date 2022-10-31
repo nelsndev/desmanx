@@ -80,6 +80,11 @@
 
     <b:modal id="modalAlteracao" class="alteracao" title="Modelo Alteração">
       <b:form>
+        <div style="display: flex; margin-bottom: 5px;">
+          <h:outputText value="ID"/>
+          <h:outputText value="#{pecaCtrl.selecionada.id}" style="margin-left: 10px;"/>
+        </div>
+
         <h:outputText value="Nome"/>
         <b:inputText value="#{modeloCtrl.selecionado.nome}"/>
 
