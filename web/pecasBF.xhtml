@@ -12,8 +12,10 @@
   <h:body>
     <b:growl id="growl" delay="3000"/>
 
+    <h1 style="text-align: center; font-weight: 700;">Peças</h1>
+
     <b:form id="formPecas">
-      <p:commandButton value="Cadastrar" style="display: inline-block; margin: 8px 8px 10px"
+      <p:commandButton value="Cadastrar" style="display: inline-block; margin: 0px 8px 20px"
                        oncomplete="$('.cadastro').modal('show')" ajax="true"/>
 
       <b:dataTable var="peca" value="#{pecaCtrl.readAll()}">

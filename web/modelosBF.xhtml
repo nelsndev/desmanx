@@ -12,10 +12,11 @@
   <h:body>
     <b:growl id="growl" delay="3000"/>
 
-    <b:form id="formModelos">
-      <p:commandButton value="Cadastrar" style="display: inline-block; margin: 8px 8px 10px"
-                       oncomplete="$('.cadastro').modal('show')" ajax="true"/>
+    <h1 style="text-align: center; font-weight: 700;">Modelos</h1>
 
+    <b:form id="formModelos">
+      <p:commandButton value="Cadastrar" style="display: inline-block; margin: 0 8px 20px;"
+                       oncomplete="$('.cadastro').modal('show')" ajax="true"/>
       <b:dataTable var="modelo" value="#{modeloCtrl.readAll()}">
         <b:dataTableColumn value="#{modelo.id}" label="ID"/>
         <b:dataTableColumn value="#{modelo.nome}" label="Nome"/>
