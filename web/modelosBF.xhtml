@@ -10,7 +10,7 @@
   </h:head>
 
   <h:body>
-    <b:growl delay="3000" showDetail="true" showSummary="true"/>
+    <b:growl id="growl" delay="3000"/>
 
     <b:form id="formModelos">
       <p:commandButton value="Cadastrar" style="display: inline-block; margin: 8px 8px 10px"
@@ -36,7 +36,7 @@
             <p:confirm message="Deseja realmente alterar este modelo?" icon="pi pi-info-circle"/>
           </p:commandButton>
 
-          <p:commandButton value="Deletar" action="#{modeloCtrl.delete()}" update=":formModelos">
+          <p:commandButton value="Deletar" action="#{modeloCtrl.delete()}" update=":formModelos :growl">
             <f:setPropertyActionListener value="#{modelo}" target="#{modeloCtrl.selecionado}"/>
             <p:confirm message="Deseja realmente deletar este modelo?" icon="pi pi-exclamation-triangle"/>
           </p:commandButton>

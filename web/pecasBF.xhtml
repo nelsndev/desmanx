@@ -10,7 +10,7 @@
   </h:head>
 
   <h:body>
-    <b:growl delay="3000"/>
+    <b:growl id="growl" delay="3000"/>
 
     <b:form id="formPecas">
       <p:commandButton value="Cadastrar" style="display: inline-block; margin: 8px 8px 10px"
@@ -36,7 +36,7 @@
             <p:confirm message="Deseja realmente alterar esta peça?" icon="pi pi-info-circle"/>
           </p:commandButton>
 
-          <p:commandButton value="Deletar" action="#{pecaCtrl.delete()}" update=":formPecas">
+          <p:commandButton value="Deletar" action="#{pecaCtrl.delete()}" update=":formPecas :growl">
             <f:setPropertyActionListener value="#{peca}" target="#{pecaCtrl.selecionada}"/>
             <p:confirm message="Deseja realmente deletar esta peça?" icon="pi pi-exclamation-triangle"/>
           </p:commandButton>
