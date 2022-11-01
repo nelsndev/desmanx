@@ -49,7 +49,8 @@
     <b:modal id="modalCadastro" class="cadastro" title="Peça Cadastro">
       <b:form>
         <h:outputText value="Nome"/>
-        <b:inputText value="#{pecaCtrl.peca.nome}"/>
+        <b:inputText value="#{pecaCtrl.peca.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório!"/>
 
         <h:outputText value="Função"/>
         <b:inputText value="#{pecaCtrl.peca.funcao}"/>
@@ -95,7 +96,8 @@
         </div>
 
         <h:outputText value="Nome"/>
-        <b:inputText value="#{pecaCtrl.selecionada.nome}"/>
+        <b:inputText value="#{pecaCtrl.selecionada.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório!"/>
 
         <h:outputText value="Função"/>
         <b:inputText value="#{pecaCtrl.selecionada.funcao}"/>

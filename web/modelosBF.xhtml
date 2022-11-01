@@ -48,10 +48,12 @@
     <b:modal id="modalCadastro" class="cadastro" title="Modelo Cadastro">
       <b:form>
         <h:outputText value="Nome"/>
-        <b:inputText value="#{modeloCtrl.modelo.nome}"/>
+        <b:inputText value="#{modeloCtrl.modelo.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório!"/>
 
         <h:outputText value="Fabricante"/>
-        <b:inputText value="#{modeloCtrl.modelo.fabricante}"/>
+        <b:inputText value="#{modeloCtrl.modelo.fabricante}" required="true"
+                     requiredMessage="Campo FABRICANTE obrigatório!"/>
 
         <h:outputText value="Tipo"/>
         <b:inputText value="#{modeloCtrl.modelo.tipo}"/>
@@ -88,10 +90,12 @@
         </div>
 
         <h:outputText value="Nome"/>
-        <b:inputText value="#{modeloCtrl.selecionado.nome}"/>
+        <b:inputText value="#{modeloCtrl.selecionado.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório"/>
 
         <h:outputText value="Fabricante"/>
-        <b:inputText value="#{modeloCtrl.selecionado.fabricante}"/>
+        <b:inputText value="#{modeloCtrl.selecionado.fabricante}" required="true"
+                     requiredMessage="Campo FABRICANTE obrigatório"/>
 
         <h:outputText value="Tipo"/>
         <b:inputText value="#{modeloCtrl.selecionado.tipo}"/>

@@ -49,10 +49,12 @@
     <b:modal id="modalCadastro" class="cadastro" title="Puxador Cadastro">
       <b:form>
         <h:outputText value="CPF"/>
-        <b:inputText value="#{puxadorCtrl.puxador.cpf}"/>
+        <b:inputText value="#{puxadorCtrl.puxador.cpf}" required="true"
+                     requiredMessage="Campo CPF obrigatório!"/>
 
         <h:outputText value="Nome"/>
-        <b:inputText value="#{puxadorCtrl.puxador.nome}"/>
+        <b:inputText value="#{puxadorCtrl.puxador.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório!"/>
 
         <h:outputText value="Codinome"/>
         <b:inputText value="#{puxadorCtrl.puxador.codinome}"/>
@@ -125,10 +127,12 @@
         </div>
 
         <h:outputText value="CPF"/>
-        <b:inputText value="#{puxadorCtrl.selecionado.cpf}"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.cpf}" required="true"
+                     requiredMessage="Campo CPF obrigatório!"/>
 
         <h:outputText value="Nome"/>
-        <b:inputText value="#{puxadorCtrl.selecionado.nome}"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório!"/>
 
         <h:outputText value="Codinome"/>
         <b:inputText value="#{puxadorCtrl.selecionado.codinome}"/>
