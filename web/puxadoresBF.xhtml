@@ -75,8 +75,9 @@
         <h:outputText value="Anos de Experiência"/>
         <b:inputText value="#{puxadorCtrl.puxador.anosExperiencia}"/>
 
-        <b:commandButton value="Cadastrar" action="#{puxadorCtrl.create()}"/>
-        <b:button value="Cancelar" dismiss="modal" style="display: inline-block; margin-left: 10px;"/>
+        <b:commandButton value="Cadastrar" look="success" action="#{puxadorCtrl.create()}"/>
+        <b:button value="Cancelar" dismiss="modal" look="danger"
+                  style="display: inline-block; margin-left: 10px;"/>
       </b:form>
     </b:modal>
 
@@ -150,8 +151,8 @@
         <h:outputText value="Anos de Experiência"/>
         <b:inputText value="#{puxadorCtrl.selecionado.anosExperiencia}"/>
 
-        <b:commandButton value="Alterar" action="#{puxadorCtrl.update()}"/>
-        <b:button value="Cancelar" dismiss="modal" style="display: inline-block; margin-left: 10px;"/>
+        <b:commandButton value="Alterar" look="success" action="#{puxadorCtrl.update()}"/>
+        <b:button value="Cancelar" dismiss="modal" look="danger" style="display: inline-block; margin-left: 10px;"/>
       </b:form>
     </b:modal>
 
