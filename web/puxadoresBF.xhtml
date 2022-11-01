@@ -15,7 +15,7 @@
     <h1 style="text-align: center; font-weight: 700;">Puxadores</h1>
 
     <b:form id="formPuxadores">
-      <p:commandButton value="Cadastrar" style="display: inline-block; margin: 0 8px 20px"
+      <p:commandButton value="Cadastrar" style="display: inline-block; margin: 0 8px 20px; font-size: 1em"
                        oncomplete="$('.cadastro').modal('show')" ajax="true"/>
 
       <b:dataTable var="puxador" value="#{puxadorCtrl.readAll()}">
@@ -25,20 +25,20 @@
         <b:dataTableColumn value="#{puxador.codinome}" label="Codinome"/>
 
         <b:dataTableColumn label="Operações">
-          <p:commandButton value="Visualizar" style="display: inline-block; margin-right: 8px"
+          <p:commandButton icon="pi pi-eye" style="display: inline-block; margin-right: 8px"
                            oncomplete="$('.visualizacao').modal('show')" update=":modalVisualizacao"
                            ajax="true">
             <f:setPropertyActionListener value="#{puxador}" target="#{puxadorCtrl.selecionado}"/>
           </p:commandButton>
 
-          <p:commandButton  value="Alterar" style="display: inline-block; margin-right: 8px"
+          <p:commandButton  icon="pi pi-pencil" style="display: inline-block; margin-right: 8px"
                             oncomplete="$('.alteracao').modal('show')" update=":modalAlteracao"
                             ajax="true">
             <f:setPropertyActionListener value="#{puxador}" target="#{puxadorCtrl.selecionado}"/>
             <p:confirm message="Deseja realmente alterar este puxador?" icon="pi pi-info-circle"/>
           </p:commandButton>
 
-          <p:commandButton value="Deletar" action="#{puxadorCtrl.delete()}" update=":formPuxadores :growl">
+          <p:commandButton icon="pi pi-trash" action="#{puxadorCtrl.delete()}" update=":formPuxadores :growl">
             <f:setPropertyActionListener value="#{puxador}" target="#{puxadorCtrl.selecionado}"/>
             <p:confirm message="Deseja realmente deletar este puxador?" icon="pi pi-exclamation-triangle"/>
           </p:commandButton>
@@ -157,8 +157,8 @@
 
     <p:confirmDialog global="true">
       <h:form>
-        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes"/>
-        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes ui-button-flat"/>
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-danger"/>
       </h:form>
     </p:confirmDialog>
   </h:body>
