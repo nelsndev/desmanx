@@ -56,7 +56,7 @@
           <p:inputText value="#{pecaCtrl.peca.tipo}"/>
 
           <h:outputText value="Observação"/>
-          <p:editor value="#{pecaCtrl.peca.observacao}"/>
+          <p:inputText value="#{pecaCtrl.peca.observacao}"/>
         </p:panelGrid>
 
         <p:commandButton value="Cadastrar" action="#{pecaCtrl.create()}"
@@ -107,7 +107,7 @@
           <p:inputText value="#{pecaCtrl.selecionada.tipo}"/>
 
           <h:outputText value="Observação"/>
-          <p:editor value="#{pecaCtrl.selecionada.observacao}"/>
+          <p:inputText value="#{pecaCtrl.selecionada.observacao}"/>
         </p:panelGrid>
 
         <p:commandButton value="Alterar" action="#{pecaCtrl.update()}"
