@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
   <h:head>
@@ -9,70 +10,62 @@
   </h:head>
 
   <h:body>
-    <p:growl id="growl" life="3000"/>
+    <b:growl id="growl" delay="3000"/>
 
-    <h:form id="formModelos">
-      <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update=":modalCadastro"
-                       style="margin-bottom: 8px;"/>
-      <p:commandButton value="Visualizar" oncomplete="PF('visualizacao').show()" update=":modalVisualizacao"
-                       style="margin-bottom: 8px; margin-left: 10px;"/>
-      <p:commandButton value="Alterar" oncomplete="PF('alteracao').show()" update=":modalAlteracao"
-                       style="margin-bottom: 8px; margin-left: 10px;"/>
-      <p:commandButton value="Deletar" action="#{modeloCtrl.delete()}" update=":formModelos:tabelaModelos :growl"
-                       style="margin-bottom: 8px; margin-left: 10px;">
-        <p:confirm message="Deseja realmente deletar o modelo selecionado?"/>
-      </p:commandButton>
+    <h1 style="text-align: center; font-weight: 700;">Modelos</h1>
 
-      <p:dataTable id="tabelaModelos" var="modelo" value="#{modeloCtrl.readAll()}" paginator="true"
-                   selectionMode="single" selection="#{modeloCtrl.selecionado}" rowKey="#{modelo.id}">
-        <f:facet name="header">Modelos</f:facet>
-        <p:column headerText="ID">#{modelo.id}</p:column>
-        <p:column headerText="Nome">#{modelo.nome}</p:column>
-        <p:column headerText="Fabricante">#{modelo.fabricante}</p:column>
-        <p:column headerText="Tipo">#{modelo.tipo}</p:column>
-      </p:dataTable>
-    </h:form>
+    <b:form id="formModelos">
+      <p:commandButton value="Cadastrar" style="display: inline-block; margin: 0 8px 20px; font-size: 1em"
+                       oncomplete="$('.cadastro').modal('show')" ajax="true"/>
+      <b:dataTable var="modelo" value="#{modeloCtrl.readAll()}">
+        <b:dataTableColumn value="#{modelo.id}" label="ID"/>
+        <b:dataTableColumn value="#{modelo.nome}" label="Nome"/>
+        <b:dataTableColumn value="#{modelo.fabricante}" label="Fabricante"/>
+        <b:dataTableColumn value="#{modelo.tipo}" label="Tipo"/>
 
-    <p:confirmDialog global="true">
-      <h:form>
-        <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
-        <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
-      </h:form>
-    </p:confirmDialog>
+        <b:dataTableColumn label="Operações">
+          <p:commandButton icon="pi pi-eye" style="display: inline-block; margin-right: 8px"
+                           oncomplete="$('.visualizacao').modal('show')" update=":modalVisualizacao"
+                           ajax="true">
+            <f:setPropertyActionListener value="#{modelo}" target="#{modeloCtrl.selecionado}"/>
+          </p:commandButton>
 
-    <p:dialog id="modalCadastro" modal="true" widgetVar="cadastro" resizable="false">
-      <f:facet name="header">Cadastro Modelo</f:facet>
+          <p:commandButton  icon="pi pi-pencil" style="display: inline-block; margin-right: 8px"
+                            oncomplete="$('.alteracao').modal('show')" update=":modalAlteracao"
+                            ajax="true">
+            <f:setPropertyActionListener value="#{modelo}" target="#{modeloCtrl.selecionado}"/>
+            <p:confirm message="Deseja realmente alterar este modelo?" icon="pi pi-info-circle"/>
+          </p:commandButton>
 
-      <h:form id="formCadastro">
-        <p:panelGrid columns="2">
-          <h:outputText value="Nome"/>
-          <p:inputText id="nome" value="#{modeloCtrl.modelo.nome}" required="true"
-                       requiredMessage="Campo nome obrigatório"/>
+          <p:commandButton icon="pi pi-trash" action="#{modeloCtrl.delete()}" update=":formModelos :growl">
+            <f:setPropertyActionListener value="#{modelo}" target="#{modeloCtrl.selecionado}"/>
+            <p:confirm message="Deseja realmente deletar este modelo?" icon="pi pi-exclamation-triangle"/>
+          </p:commandButton>
+        </b:dataTableColumn>
+      </b:dataTable>
+    </b:form>
 
-          <h:outputText value="Fabricante"/>
-          <p:inputText id="fabricante" value="#{modeloCtrl.modelo.fabricante}" required="true"
-                       requiredMessage="Campo fabricante obrigatório"/>
+    <b:modal id="modalCadastro" class="cadastro" title="Modelo Cadastro">
+      <b:form>
+        <h:outputText value="Nome"/>
+        <b:inputText value="#{modeloCtrl.modelo.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório!"/>
 
-          <h:outputText value="Tipo"/>
-          <p:inputText value="#{modeloCtrl.modelo.tipo}"/>
+        <h:outputText value="Fabricante"/>
+        <b:inputText value="#{modeloCtrl.modelo.fabricante}" required="true"
+                     requiredMessage="Campo FABRICANTE obrigatório!"/>
 
-          <h:outputText value="Potência do Motor"/>
-          <p:inputText value="#{modeloCtrl.modelo.motorPotencia}"/>
+        <h:outputText value="Tipo"/>
+        <b:inputText value="#{modeloCtrl.modelo.tipo}"/>
 
-          <h:outputText value="Cilindrada do Motor"/>
-          <p:inputText value="#{modeloCtrl.modelo.motorCilindrada}"/>
-        </p:panelGrid>
+        <b:commandButton value="Cadastrar" look="success" action="#{modeloCtrl.create()}"/>
+        <b:button value="Cancelar" dismiss="modal" look="danger"
+                  style="display: inline-block; margin-left: 10px;"/>
+      </b:form>
+    </b:modal>
 
-        <p:commandButton value="Cadastrar" action="#{modeloCtrl.create()}"
-                         oncomplete="PF('cadastro').hide()" update=":formModelos:tabelaModelos :growl"/>
-        <p:commandButton value="Cancelar" oncomplete="PF('cadastro').hide()"/>
-      </h:form>
-    </p:dialog>
-
-    <p:dialog id="modalVisualizacao" modal="true" widgetVar="visualizacao" resizable="false">
-      <f:facet name="header">Visualização Modelo</f:facet>
-
-      <h:form id="formVisualizacao">
+    <b:modal id="modalVisualizacao" class="visualizacao" title="Modelo Visualização">
+      <b:form>
         <p:panelGrid columns="2">
           <h:outputText value="ID"/>
           <h:outputText value="#{modeloCtrl.selecionado.id}"/>
@@ -85,48 +78,39 @@
 
           <h:outputText value="Tipo"/>
           <h:outputText value="#{modeloCtrl.selecionado.tipo}"/>
-
-          <h:outputText value="Potência do Motor"/>
-          <h:outputText value="#{modeloCtrl.selecionado.motorPotencia}"/>
-
-          <h:outputText value="Cilindrada do Motor"/>
-          <h:outputText value="#{modeloCtrl.selecionado.motorCilindrada}"/>
         </p:panelGrid>
-      </h:form>
-    </p:dialog>
+      </b:form>
+    </b:modal>
 
-    <p:dialog id="modalAlteracao" modal="true" widgetVar="alteracao" resizable="false">
-      <f:facet name="header">Alteração Modelo</f:facet>
-
-      <h:form id="formAlteracao">
-        <p:panelGrid columns="2">
+    <b:modal id="modalAlteracao" class="alteracao" title="Modelo Alteração">
+      <b:form>
+        <div style="display: flex; margin-bottom: 5px;">
           <h:outputText value="ID"/>
-          <h:outputText value="#{modeloCtrl.selecionado.id}"/>
+          <h:outputText value="#{pecaCtrl.selecionada.id}" style="margin-left: 10px;"/>
+        </div>
 
-          <h:outputText value="Nome"/>
-          <p:inputText value="#{modeloCtrl.selecionado.nome}" required="true"
-                       requiredMessage="Campo nome obrigatório"/>
+        <h:outputText value="Nome"/>
+        <b:inputText value="#{modeloCtrl.selecionado.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório"/>
 
-          <h:outputText value="Fabricante"/>
-          <p:inputText value="#{modeloCtrl.selecionado.fabricante}" required="true"
-                       requiredMessage="Campo fabricante obrigatório"/>
+        <h:outputText value="Fabricante"/>
+        <b:inputText value="#{modeloCtrl.selecionado.fabricante}" required="true"
+                     requiredMessage="Campo FABRICANTE obrigatório"/>
 
-          <h:outputText value="Tipo"/>
-          <p:inputText value="#{modeloCtrl.selecionado.tipo}"/>
+        <h:outputText value="Tipo"/>
+        <b:inputText value="#{modeloCtrl.selecionado.tipo}"/>
 
-          <h:outputText value="Potência do Motor"/>
-          <p:inputText value="#{modeloCtrl.selecionado.motorPotencia}"/>
+        <b:commandButton value="Alterar" look="success" action="#{modeloCtrl.update()}"/>
+        <b:button value="Cancelar" dismiss="modal" look="danger"
+                  style="display: inline-block; margin-left: 10px;"/>
+      </b:form>
+    </b:modal>
 
-          <h:outputText value="Cilindrada do Motor"/>
-          <p:inputText value="#{modeloCtrl.selecionado.motorCilindrada}"/>
-        </p:panelGrid>
-
-        <p:commandButton value="Alterar" action="#{modeloCtrl.update()}"
-                         oncomplete="PF('alteracao').hide()" update=":formModelos:tabelaModelos :growl">
-          <p:confirm message="Deseja realmente alterar o modelo selecionado?"/>
-        </p:commandButton>
-        <p:commandButton value="Cancelar" oncomplete="PF('alteracao').hide()"/>
+    <p:confirmDialog global="true">
+      <h:form>
+        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes ui-button-flat"/>
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-danger"/>
       </h:form>
-    </p:dialog>
+    </p:confirmDialog>
   </h:body>
 </html>

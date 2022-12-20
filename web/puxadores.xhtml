@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
   <h:head>
@@ -9,82 +10,81 @@
   </h:head>
 
   <h:body>
-    <p:growl id="growl" life="3000"/>
+    <b:growl id="growl" delay="3000"/>
 
-    <h:form id="formPuxadores">
-      <p:commandButton value="Cadastrar" oncomplete="PF('cadastro').show()" update=":modalCadastro"
-                       style="margin-bottom: 8px;"/>
-      <p:commandButton value="Visualizar" oncomplete="PF('visualizacao').show()" update=":modalVisualizacao"
-                       style="margin-bottom: 8px; margin-left: 10px;"/>
-      <p:commandButton value="Alterar" oncomplete="PF('alteracao').show()" update=":modalAlteracao"
-                       style="margin-bottom: 8px; margin-left: 10px;"/>
-      <p:commandButton value="Deletar" action="#{puxadorCtrl.delete()}" update=":formPuxadores:tabelaPuxadores :growl"
-                       style="margin-bottom: 8px; margin-left: 10px;">
-        <p:confirm message="Deseja realmente deletar o puxador selecionado?"/>
-      </p:commandButton>
+    <h1 style="text-align: center; font-weight: 700;">Puxadores</h1>
 
-      <p:dataTable id="tabelaPuxadores" var="puxador" value="#{puxadorCtrl.readAll()}" paginator="true"
-                   selectionMode="single" selection="#{puxadorCtrl.selecionado}" rowKey="#{puxador.id}">
-        <f:facet name="header">Puxadores</f:facet>
-        <p:column headerText="ID">#{puxador.id}</p:column>
-        <p:column headerText="CPF">#{puxador.cpf}</p:column>
-        <p:column headerText="Nome">#{puxador.nome}</p:column>
-        <p:column headerText="Codinome">#{puxador.codinome}</p:column>
-      </p:dataTable>
-    </h:form>
+    <b:form id="formPuxadores">
+      <p:commandButton value="Cadastrar" style="display: inline-block; margin: 0 8px 20px; font-size: 1em"
+                       oncomplete="$('.cadastro').modal('show')" ajax="true"/>
 
-    <p:confirmDialog global="true">
-      <h:form>
-        <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
-        <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
-      </h:form>
-    </p:confirmDialog>
+      <b:dataTable var="puxador" value="#{puxadorCtrl.readAll()}">
+        <b:dataTableColumn value="#{puxador.id}" label="ID"/>
+        <b:dataTableColumn value="#{puxador.cpf}" label="CPF"/>
+        <b:dataTableColumn value="#{puxador.nome}" label="Nome"/>
+        <b:dataTableColumn value="#{puxador.codinome}" label="Codinome"/>
 
-    <p:dialog id="modalCadastro" modal="true" widgetVar="cadastro" resizable="false">
-      <f:facet name="header">Cadastro Puxador</f:facet>
+        <b:dataTableColumn label="Operações">
+          <p:commandButton icon="pi pi-eye" style="display: inline-block; margin-right: 8px"
+                           oncomplete="$('.visualizacao').modal('show')" update=":modalVisualizacao"
+                           ajax="true">
+            <f:setPropertyActionListener value="#{puxador}" target="#{puxadorCtrl.selecionado}"/>
+          </p:commandButton>
 
-      <h:form id="formCadastro">
-        <p:panelGrid columns="2">
-          <h:outputText value="CPF"/>
-          <p:inputText value="#{puxadorCtrl.puxador.cpf}" required="true"
-                       requiredMessage="Campo cpf obrigatório"/>
+          <p:commandButton  icon="pi pi-pencil" style="display: inline-block; margin-right: 8px"
+                            oncomplete="$('.alteracao').modal('show')" update=":modalAlteracao"
+                            ajax="true">
+            <f:setPropertyActionListener value="#{puxador}" target="#{puxadorCtrl.selecionado}"/>
+            <p:confirm message="Deseja realmente alterar este puxador?" icon="pi pi-info-circle"/>
+          </p:commandButton>
 
-          <h:outputText value="Nome"/>
-          <p:inputText value="#{puxadorCtrl.puxador.nome}" required="true"
-                       requiredMessage="Campo nome obrigatório"/>
+          <p:commandButton icon="pi pi-trash" action="#{puxadorCtrl.delete()}" update=":formPuxadores :growl">
+            <f:setPropertyActionListener value="#{puxador}" target="#{puxadorCtrl.selecionado}"/>
+            <p:confirm message="Deseja realmente deletar este puxador?" icon="pi pi-exclamation-triangle"/>
+          </p:commandButton>
+        </b:dataTableColumn>
+      </b:dataTable>
+    </b:form>
 
-          <h:outputText value="Codinome"/>
-          <p:inputText value="#{puxadorCtrl.puxador.codinome}"/>
+    <b:modal id="modalCadastro" class="cadastro" title="Puxador Cadastro">
+      <b:form>
+        <h:outputText value="CPF"/>
+        <b:inputText value="#{puxadorCtrl.puxador.cpf}" required="true"
+                     requiredMessage="Campo CPF obrigatório!"/>
 
-          <h:outputText value="Telefone"/>
-          <p:inputText value="#{puxadorCtrl.puxador.telefone}"/>
+        <h:outputText value="Nome"/>
+        <b:inputText value="#{puxadorCtrl.puxador.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório!"/>
 
-          <h:outputText value="Endereço"/>
-          <p:inputText value="#{puxadorCtrl.puxador.endereco}"/>
+        <h:outputText value="Codinome"/>
+        <b:inputText value="#{puxadorCtrl.puxador.codinome}"/>
 
-          <h:outputText value="Endereço da Mãe"/>
-          <p:inputText value="#{puxadorCtrl.puxador.enderecoMae}"/>
+        <h:outputText value="Telefone"/>
+        <b:inputText value="#{puxadorCtrl.puxador.telefone}"/>
 
-          <h:outputText value="Número de prisões"/>
-          <p:inputText value="#{puxadorCtrl.puxador.quantidadePrisoes}"/>
+        <h:outputText value="Endereço"/>
+        <b:inputText value="#{puxadorCtrl.puxador.endereco}"/>
 
-          <h:outputText value="Especialidade de Roubo"/>
-          <p:inputText value="#{puxadorCtrl.puxador.especialidadeRoubo}"/>
+        <h:outputText value="Endereço da Mãe"/>
+        <b:inputText value="#{puxadorCtrl.puxador.enderecoMae}"/>
 
-          <h:outputText value="Anos de experiência"/>
-          <p:inputText value="#{puxadorCtrl.puxador.anosExperiencia}"/>
-        </p:panelGrid>
+        <h:outputText value="Quantidade de Prisões"/>
+        <b:inputText value="#{puxadorCtrl.puxador.quantidadePrisoes}"/>
 
-        <p:commandButton value="Cadastrar" action="#{puxadorCtrl.create()}"
-                         oncomplete="PF('cadastro').hide()" update=":formPuxadores:tabelaPuxadores :growl"/>
-        <p:commandButton value="Cancelar" oncomplete="PF('cadastro').hide()"/>
-      </h:form>
-    </p:dialog>
+        <h:outputText value="Especialidade de Roubo"/>
+        <b:inputText value="#{puxadorCtrl.puxador.especialidadeRoubo}"/>
 
-    <p:dialog id="modalVisualizacao" modal="true" widgetVar="visualizacao" resizable="false">
-      <f:facet name="header">Visualização Puxador</f:facet>
+        <h:outputText value="Anos de Experiência"/>
+        <b:inputText value="#{puxadorCtrl.puxador.anosExperiencia}"/>
 
-      <h:form id="formVisualizacao">
+        <b:commandButton value="Cadastrar" look="success" action="#{puxadorCtrl.create()}"/>
+        <b:button value="Cancelar" dismiss="modal" look="danger"
+                  style="display: inline-block; margin-left: 10px;"/>
+      </b:form>
+    </b:modal>
+
+    <b:modal id="modalVisualizacao" class="visualizacao" title="Puxador Visualização">
+      <b:form>
         <p:panelGrid columns="2">
           <h:outputText value="ID"/>
           <h:outputText value="#{puxadorCtrl.selecionado.id}"/>
@@ -107,62 +107,64 @@
           <h:outputText value="Endereço da Mãe"/>
           <h:outputText value="#{puxadorCtrl.selecionado.enderecoMae}"/>
 
-          <h:outputText value="Número de prisões"/>
+          <h:outputText value="Quantidade de Prisões"/>
           <h:outputText value="#{puxadorCtrl.selecionado.quantidadePrisoes}"/>
 
           <h:outputText value="Especialidade de Roubo"/>
           <h:outputText value="#{puxadorCtrl.selecionado.especialidadeRoubo}"/>
 
-          <h:outputText value="Anos de experiência"/>
+          <h:outputText value="Anos de Experiência"/>
           <h:outputText value="#{puxadorCtrl.selecionado.anosExperiencia}"/>
         </p:panelGrid>
-      </h:form>
-    </p:dialog>
+      </b:form>
+    </b:modal>
 
-    <p:dialog id="modalAlteracao" modal="true" widgetVar="alteracao" resizable="false">
-      <f:facet name="header">Alteração Puxador</f:facet>
-
-      <h:form id="formAlteracao">
-        <p:panelGrid columns="2">
+    <b:modal id="modalAlteracao" class="alteracao" title="Puxador Alteração">
+      <b:form>
+        <div style="display: flex; margin-bottom: 5px;">
           <h:outputText value="ID"/>
-          <h:outputText value="#{puxadorCtrl.selecionado.id}"/>
+          <h:outputText value="#{puxadorCtrl.selecionado.id}" style="margin-left: 10px;"/>
+        </div>
 
-          <h:outputText value="CPF"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.cpf}" required="true"
-                       requiredMessage="Campo cpf obrigatório"/>
+        <h:outputText value="CPF"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.cpf}" required="true"
+                     requiredMessage="Campo CPF obrigatório!"/>
 
-          <h:outputText value="Nome"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.nome}" required="true"
-                       requiredMessage="Campo nome obrigatório"/>
+        <h:outputText value="Nome"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.nome}" required="true"
+                     requiredMessage="Campo NOME obrigatório!"/>
 
-          <h:outputText value="Codinome"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.codinome}"/>
+        <h:outputText value="Codinome"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.codinome}"/>
 
-          <h:outputText value="Telefone"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.telefone}"/>
+        <h:outputText value="Telefone"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.telefone}"/>
 
-          <h:outputText value="Endereço"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.endereco}"/>
+        <h:outputText value="Endereço"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.endereco}"/>
 
-          <h:outputText value="Endereço da Mãe"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.enderecoMae}"/>
+        <h:outputText value="Endereço da Mãe"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.enderecoMae}"/>
 
-          <h:outputText value="Número de prisões"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.quantidadePrisoes}"/>
+        <h:outputText value="Quantidade de Prisões"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.quantidadePrisoes}"/>
 
-          <h:outputText value="Especialidade de Roubo"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.especialidadeRoubo}"/>
+        <h:outputText value="Especialidade de Roubo"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.especialidadeRoubo}"/>
 
-          <h:outputText value="Anos de experiência"/>
-          <p:inputText value="#{puxadorCtrl.selecionado.anosExperiencia}"/>
-        </p:panelGrid>
+        <h:outputText value="Anos de Experiência"/>
+        <b:inputText value="#{puxadorCtrl.selecionado.anosExperiencia}"/>
 
-        <p:commandButton value="Alterar" action="#{puxadorCtrl.update()}"
-                         oncomplete="PF('alteracao').hide()" update=":formPuxadores:tabelaPuxadores :growl">
-          <p:confirm message="Deseja realmente alterar o puxador selecionado?"/>
-        </p:commandButton>
-        <p:commandButton value="Cancelar" oncomplete="PF('alteracao').hide()"/>
+        <b:commandButton value="Alterar" look="success" action="#{puxadorCtrl.update()}"/>
+        <b:button value="Cancelar" dismiss="modal" look="danger" style="display: inline-block; margin-left: 10px;"/>
+      </b:form>
+    </b:modal>
+
+    <p:confirmDialog global="true">
+      <h:form>
+        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes ui-button-flat"/>
+        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-danger"/>
       </h:form>
-    </p:dialog>
+    </p:confirmDialog>
   </h:body>
 </html>
