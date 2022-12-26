@@ -2,6 +2,7 @@ package br.edu.ifpe.recife.controller;
 
 import br.edu.ifpe.recife.model.dao.ManagerDao;
 import br.edu.ifpe.recife.model.negocio.Modelo;
+import br.edu.ifpe.recife.model.negocio.Peca;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -38,7 +39,8 @@ public class ModeloController {
         this.modelo = modelo;
     }
 
-    public void create() {
+    public void create(List<Peca> pecas) {
+        this.modelo.setPecas(pecas);
         ManagerDao.getInstance().create(this.modelo);
         this.modelo = new Modelo();
         FacesContext.getCurrentInstance()

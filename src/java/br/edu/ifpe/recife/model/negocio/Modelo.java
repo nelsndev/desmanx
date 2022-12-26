@@ -1,12 +1,15 @@
 package br.edu.ifpe.recife.model.negocio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Modelo implements Serializable {
@@ -29,6 +32,13 @@ public class Modelo implements Serializable {
 
     @Column(name = "MOTOR_CILINDRADA", precision = 2)
     private Double motorCilindrada;
+
+    @OneToMany
+    private List<Peca> pecas;
+
+    public Modelo() {
+        this.pecas = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -78,6 +88,14 @@ public class Modelo implements Serializable {
         this.motorCilindrada = motorCilindrada;
     }
 
+    public List<Peca> getPecas() {
+        return pecas;
+    }
+
+    public void setPecas(List<Peca> pecas) {
+        this.pecas = pecas;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -87,6 +105,7 @@ public class Modelo implements Serializable {
         hash = 83 * hash + Objects.hashCode(this.tipo);
         hash = 83 * hash + Objects.hashCode(this.motorPotencia);
         hash = 83 * hash + Objects.hashCode(this.motorCilindrada);
+        hash = 83 * hash + Objects.hashCode(this.pecas);
         return hash;
     }
 
@@ -120,12 +139,16 @@ public class Modelo implements Serializable {
         if (!Objects.equals(this.motorCilindrada, other.motorCilindrada)) {
             return false;
         }
+        if (!Objects.equals(this.pecas, other.pecas)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Modelo{" + "id=" + id + ", nome=" + nome + ", fabricante=" + fabricante + ", tipo="
-            + tipo + ", motorPotencia=" + motorPotencia + ", motorCilindrada=" + motorCilindrada + '}';
+        return "Modelo{" + "id=" + id + ", nome=" + nome + ", fabricante=" + fabricante
+            + ", tipo=" + tipo + ", motorPotencia=" + motorPotencia + ", motorCilindrada="
+            + motorCilindrada + ", pecas=" + pecas + '}';
     }
 }
