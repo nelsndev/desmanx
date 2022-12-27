@@ -21,8 +21,11 @@ public class Puxador implements Serializable {
     @Column(nullable = false, length = 70)
     private String nome;
 
-    @Column(length = 30)
+    @Column(nullable = false, length = 20)
     private String codinome;
+
+    @Column(nullable = false, length = 30)
+    private String senha;
 
     @Column(length = 15)
     private String telefone;
@@ -72,6 +75,14 @@ public class Puxador implements Serializable {
 
     public void setCodinome(String codinome) {
         this.codinome = codinome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getTelefone() {
@@ -135,6 +146,7 @@ public class Puxador implements Serializable {
         hash = 47 * hash + Objects.hashCode(this.quantidadePrisoes);
         hash = 47 * hash + Objects.hashCode(this.especialidadeRoubo);
         hash = 47 * hash + Objects.hashCode(this.anosExperiencia);
+        hash = 47 * hash + Objects.hashCode(this.senha);
         return hash;
     }
 
@@ -180,14 +192,18 @@ public class Puxador implements Serializable {
         if (!Objects.equals(this.anosExperiencia, other.anosExperiencia)) {
             return false;
         }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Puxador{" + "id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", sobrenome=" + codinome
-            + ", telefone=" + telefone + ", endereco=" + endereco + ", enderecoMae=" + enderecoMae
-            + ", quantidadePrisoes=" + quantidadePrisoes + ", especialidadeRoubo=" + especialidadeRoubo
-            + ", anosExperiencia=" + anosExperiencia + '}';
+        return "Puxador{" + "id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", codinome="
+            + codinome + ", senha=" + senha + ", telefone=" + telefone + ", endereco=" + endereco
+            + ", enderecoMae=" + enderecoMae + ", quantidadePrisoes=" + quantidadePrisoes
+            + ", especialidadeRoubo=" + especialidadeRoubo + ", anosExperiencia=" + anosExperiencia
+            + '}';
     }
 }

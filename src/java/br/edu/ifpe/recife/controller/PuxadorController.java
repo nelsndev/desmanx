@@ -38,14 +38,24 @@ public class PuxadorController {
         this.puxador = puxador;
     }
 
-    public void create() {
+    public void create(String confirmacao) {
+        if (!this.puxador.getSenha().equals(confirmacao)) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
+            return;
+        }
         ManagerDao.getInstance().create(this.puxador);
         this.puxador = new Puxador();
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Puxador cadastrado com sucesso!"));
     }
 
-    public void update() {
+    public void update(String confirmacao) {
+        if (!this.puxador.getSenha().equals(confirmacao)) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
+            return;
+        }
         ManagerDao.getInstance().update(this.selecionado);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Puxador alterado com sucesso!"));
