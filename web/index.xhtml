@@ -31,8 +31,7 @@
           <b:inputSecret value="#{senha}"/>
         </b:panelGrid>
 
-        <b:commandButton value="Logar" style=""
-                         style-class="btn btn-primary"
+        <b:commandButton value="Logar" style-class="btn btn-primary"
                          action="#{loginCtrl.loga(login, senha)}"/>
 
         <b:link value="Cadastre-se" onclick="$('#modalCadastro').modal('show')"
