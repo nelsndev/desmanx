@@ -2,15 +2,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
   <h:head>
     <title>Menu Puxador</title>
   </h:head>
   <h:body>
+    <c:if test="#{loginCtrl.puxadorLogado eq null}">
+      <script>location.href = "index.xhtml";</script>
+    </c:if>
+
     <b:growl delay="3000"/>
 
     <b:form id="formMenuPuxador">
-      <b:navBar brand="Início" brand-href="index.xhtml" fluid="true">
+      <b:navBar fluid="true">
+        <b:navbarLinks>
+          <b:navLink value="Início" href="indexPuxador.xhtml"/>
+          <b:navLink value="Adicionar Cabrito" onclick="$('#modalCadastro').modal('show')"/>
+        </b:navbarLinks>
+
         <b:navbarLinks style="float: right" pull="right">
           <b:dropMenu value=" #{loginCtrl.puxadorLogado.codinome}">
             <b:navLink value="Meu Cadastro" href="#"/>
@@ -20,6 +32,53 @@
         </b:navbarLinks>
       </b:navBar>
     </b:form>
+
+    <b:modal id="modalCadastro" title="Adicionar Cabrito">
+      <b:form id="formCadastro">
+        <div style="margin-bottom: 20px">
+          <h:outputText value="Modelo"/>
+
+          <h:selectOneMenu value="#{cabritoCtrl.cabrito.modelo}"
+                           style="display: inline-block; margin-left: 15px"
+                           converter="modeloConverter">
+            <c:forEach var="modelo" items="#{modeloCtrl.readAll()}">
+              <f:selectItem itemLabel="#{modelo.nome}" itemValue="#{modelo}"/>
+            </c:forEach>
+          </h:selectOneMenu>
+        </div>
+
+        <h:outputText value="Placa"/>
+        <b:inputText value="#{cabritoCtrl.cabrito.placa}"/>
+
+        <h:outputText value="Chassi"/>
+        <b:inputText value="#{cabritoCtrl.cabrito.chassi}" required="true"
+                     requiredMessage="Campo CHASSI obrigatório"/>
+
+        <h:outputText value="Número de portas"/>
+        <b:inputText value="#{cabritoCtrl.cabrito.quantidadePortas}"/>
+
+        <h:outputText value="Cor"/>
+        <b:inputText value="#{cabritoCtrl.cabrito.cor}"/>
+
+        <h:outputText value="Tipo de Câmbio"/>
+        <b:inputText value="#{cabritoCtrl.cabrito.tipoCambio}"/>
+
+        <h:outputText value="Tipo de Combustível"/>
+        <b:inputText value="#{cabritoCtrl.cabrito.tipoCombustivel}"/>
+
+        <h:outputText value="Observação"/>
+        <b:inputText value="#{cabritoCtrl.cabrito.observacao}"/>
+
+        <h:outputText value="Data do Roubo"/>
+        <p:datePicker value="#{cabritoCtrl.cabrito.dataRoubo}" style="margin-left: 15px"/>
+
+        <div style="margin-top: 25px">
+          <b:commandButton value="Adicionar" look="success"
+                           action="#{cabritoCtrl.create(loginCtrl.puxadorLogado)}"/>
+          <b:button value="Cancelar" dismiss="modal" look="danger"
+                    style="display: inline-block; margin-left: 10px;"/>
+        </div>
+      </b:form>
+    </b:modal>
   </h:body>
 </html>
-

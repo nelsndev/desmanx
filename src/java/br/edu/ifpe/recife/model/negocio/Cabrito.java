@@ -49,6 +49,11 @@ public class Cabrito implements Serializable {
     @OneToOne
     private Puxador puxador;
 
+    public Cabrito() {
+        this.modelo = new Modelo();
+        this.puxador = new Puxador();
+    }
+
     public Long getId() {
         return id;
     }
