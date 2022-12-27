@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -41,6 +42,12 @@ public class Cabrito implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataRoubo;
+
+    @OneToOne
+    private Modelo modelo;
+
+    @OneToOne
+    private Puxador puxador;
 
     public Long getId() {
         return id;
@@ -114,6 +121,22 @@ public class Cabrito implements Serializable {
         this.dataRoubo = dataRoubo;
     }
 
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
+    public Puxador getPuxador() {
+        return puxador;
+    }
+
+    public void setPuxador(Puxador puxador) {
+        this.puxador = puxador;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -126,6 +149,8 @@ public class Cabrito implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.tipoCombustivel);
         hash = 29 * hash + Objects.hashCode(this.observacao);
         hash = 29 * hash + Objects.hashCode(this.dataRoubo);
+        hash = 29 * hash + Objects.hashCode(this.modelo);
+        hash = 29 * hash + Objects.hashCode(this.puxador);
         return hash;
     }
 
@@ -168,6 +193,12 @@ public class Cabrito implements Serializable {
         if (!Objects.equals(this.dataRoubo, other.dataRoubo)) {
             return false;
         }
+        if (!Objects.equals(this.modelo, other.modelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.puxador, other.puxador)) {
+            return false;
+        }
         return true;
     }
 
@@ -176,6 +207,6 @@ public class Cabrito implements Serializable {
         return "Cabrito{" + "id=" + id + ", placa=" + placa + ", chassi=" + chassi
             + ", quantidadePortas=" + quantidadePortas + ", cor=" + cor + ", tipoCambio="
             + tipoCambio + ", tipoCombustivel=" + tipoCombustivel + ", observacao=" + observacao
-            + ", dataRoubo=" + dataRoubo + '}';
+            + ", dataRoubo=" + dataRoubo + ", modelo=" + modelo + ", puxador=" + puxador + '}';
     }
 }
