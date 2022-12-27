@@ -23,7 +23,7 @@ public class PecaController {
     public void init() {
         this.peca = new Peca();
         this.selecionada = null;
-        this.pecas = null;
+        this.pecas = new DualListModel<>();
     }
 
     public Peca getPeca() {
