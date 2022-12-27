@@ -43,6 +43,9 @@ public class Cabrito implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataRoubo;
 
+    @Column(nullable = false)
+    private Boolean desmanxFinalizado;
+
     @OneToOne
     private Modelo modelo;
 
@@ -142,6 +145,14 @@ public class Cabrito implements Serializable {
         this.puxador = puxador;
     }
 
+    public Boolean getDesmanxFinalizado() {
+        return desmanxFinalizado;
+    }
+
+    public void setDesmanxFinalizado(Boolean desmanxFinalizado) {
+        this.desmanxFinalizado = desmanxFinalizado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -154,6 +165,7 @@ public class Cabrito implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.tipoCombustivel);
         hash = 29 * hash + Objects.hashCode(this.observacao);
         hash = 29 * hash + Objects.hashCode(this.dataRoubo);
+        hash = 29 * hash + Objects.hashCode(this.desmanxFinalizado);
         hash = 29 * hash + Objects.hashCode(this.modelo);
         hash = 29 * hash + Objects.hashCode(this.puxador);
         return hash;
@@ -198,6 +210,9 @@ public class Cabrito implements Serializable {
         if (!Objects.equals(this.dataRoubo, other.dataRoubo)) {
             return false;
         }
+        if (!Objects.equals(this.desmanxFinalizado, other.desmanxFinalizado)) {
+            return false;
+        }
         if (!Objects.equals(this.modelo, other.modelo)) {
             return false;
         }
@@ -212,6 +227,7 @@ public class Cabrito implements Serializable {
         return "Cabrito{" + "id=" + id + ", placa=" + placa + ", chassi=" + chassi
             + ", quantidadePortas=" + quantidadePortas + ", cor=" + cor + ", tipoCambio="
             + tipoCambio + ", tipoCombustivel=" + tipoCombustivel + ", observacao=" + observacao
-            + ", dataRoubo=" + dataRoubo + ", modelo=" + modelo + ", puxador=" + puxador + '}';
+            + ", dataRoubo=" + dataRoubo + ", desmanxFinalizado=" + desmanxFinalizado
+            + ", modelo=" + modelo + ", puxador=" + puxador + '}';
     }
 }

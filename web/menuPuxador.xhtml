@@ -20,14 +20,15 @@
       <b:navBar fluid="true">
         <b:navbarLinks>
           <b:navLink value="Início" href="indexPuxador.xhtml"/>
-          <b:navLink value="Adicionar Cabrito" onclick="$('#modalCadastro').modal('show')"/>
+          <b:navLink value="Adicionar Cabrito" onclick="$('#modalCadastro').modal('show')"
+                     style="font-weight: 700"/>
         </b:navbarLinks>
 
         <b:navbarLinks style="float: right" pull="right">
           <b:dropMenu value=" #{loginCtrl.puxadorLogado.codinome}">
             <b:navLink value="Meu Cadastro" href="#"/>
             <b:navLink value="Mudar Senha" href="#"/>
-            <b:navCommandLink value="Sair"  action="#{loginCtrl.desloga()}"/>
+            <b:navCommandLink value="Sair" action="#{loginCtrl.desloga()}" oncomplete=""/>
           </b:dropMenu>
         </b:navbarLinks>
       </b:navBar>
