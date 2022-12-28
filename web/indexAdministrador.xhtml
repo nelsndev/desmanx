@@ -14,6 +14,8 @@
   <h:body>
     <ui:include src="menuAdministrador.xhtml"/>
 
+    <b:growl delay="3000"/>
+
     <h2 style="font-size: 20px; font-weight: 800; color: #f01d1d; margin-left: 100px; margin-top: 50px">
       Pendentes
     </h2>
@@ -26,13 +28,47 @@
             #{cabrito.modelo.nome}
           </h2>
           <b:form>
-            <p:commandButton value="Criar Desmanx" style="margin-top: 10px">
-              <f:setPropertyActionListener value="#{cabrito}" target="#{cabritoCtrl.selecionado}"/>
+            <p:commandButton value="Realizar Desmanx" oncomplete="$('#cadastroDesmanx').modal('show')"
+                             update=":cadastroDesmanx" ajax="true" style="margin-top: 10px"
+                             actionListener="#{desmanxCtrl.preencheDesmanx(cabrito)}">
             </p:commandButton>
           </b:form>
         </p:card>
       </c:forEach>
     </div>
+
+    <b:modal id="cadastroDesmanx" title="Realizar Desmanx">
+      <b:form>
+        <p:panelGrid columns="2">
+          <h:outputText value="Modelo"/>
+          <h:outputText value="#{desmanxCtrl.desmanx.cabrito.modelo.nome}"/>
+
+          <h:outputText value="Data Desmanx"/>
+          <h:outputText value="#{desmanxCtrl.desmanx.dataDesmanx}"/>
+        </p:panelGrid>
+
+        <p:panelGrid columns="3" style="margin-top: 10px">
+          <f:facet name="header">Peças</f:facet>
+
+          <h:outputText value="Nome" style="font-weight: 700"/>
+          <h:outputText value="Quantidade" style="font-weight: 700; margin-left: 70px"/>
+          <h:outputText value="Avaria" style="font-weight: 700; margin-left: 80px"/>
+
+          <c:forEach var="itemPeca" items="#{desmanxCtrl.desmanx.itensPeca}">
+            <h:outputText value="#{itemPeca.peca.nome}"/>
+            <b:inputText value="#{itemPeca.quantidade}"/>
+            <b:inputText value="#{itemPeca.avaria}"/>
+          </c:forEach>
+        </p:panelGrid>
+
+        <div style="margin-top: 20px">
+          <b:commandButton value="Finalizar" look="success"
+                           action="#{desmanxCtrl.create()}"/>
+          <b:button value="Cancelar" dismiss="modal" look="danger"
+                    style="display: inline-block; margin-left: 10px;"/>
+        </div>
+      </b:form>
+    </b:modal>
 
     <h2 style="font-size: 20px; font-weight: 800; margin-left: 100px; margin-top: 50px">
       Finalizados

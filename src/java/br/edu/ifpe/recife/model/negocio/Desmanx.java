@@ -1,8 +1,11 @@
 package br.edu.ifpe.recife.model.negocio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +25,16 @@ public class Desmanx implements Serializable {
     private Date dataDesmanx;
 
     @OneToOne
-    private Puxador puxador;
+    private Cabrito cabrito;
+
+    @ElementCollection
+    private List<ItemPeca> itensPeca;
+
+    public Desmanx() {
+        this.dataDesmanx = new Date();
+        this.cabrito = new Cabrito();
+        this.itensPeca = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -40,12 +52,20 @@ public class Desmanx implements Serializable {
         this.dataDesmanx = dataDesmanx;
     }
 
-    public Puxador getPuxador() {
-        return puxador;
+    public Cabrito getCabrito() {
+        return cabrito;
     }
 
-    public void setPuxador(Puxador puxador) {
-        this.puxador = puxador;
+    public void setCabrito(Cabrito cabrito) {
+        this.cabrito = cabrito;
+    }
+
+    public List<ItemPeca> getItensPeca() {
+        return itensPeca;
+    }
+
+    public void setItensPeca(List<ItemPeca> itensPeca) {
+        this.itensPeca = itensPeca;
     }
 
     @Override
@@ -53,7 +73,8 @@ public class Desmanx implements Serializable {
         int hash = 3;
         hash = 29 * hash + Objects.hashCode(this.id);
         hash = 29 * hash + Objects.hashCode(this.dataDesmanx);
-        hash = 29 * hash + Objects.hashCode(this.puxador);
+        hash = 29 * hash + Objects.hashCode(this.cabrito);
+        hash = 29 * hash + Objects.hashCode(this.itensPeca);
         return hash;
     }
 
@@ -75,7 +96,10 @@ public class Desmanx implements Serializable {
         if (!Objects.equals(this.dataDesmanx, other.dataDesmanx)) {
             return false;
         }
-        if (!Objects.equals(this.puxador, other.puxador)) {
+        if (!Objects.equals(this.cabrito, other.cabrito)) {
+            return false;
+        }
+        if (!Objects.equals(this.itensPeca, other.itensPeca)) {
             return false;
         }
         return true;
@@ -83,6 +107,7 @@ public class Desmanx implements Serializable {
 
     @Override
     public String toString() {
-        return "Desmanx{" + "id=" + id + ", dataDesmanx=" + dataDesmanx + ", puxador=" + puxador + '}';
+        return "Desmanx{" + "id=" + id + ", dataDesmanx=" + dataDesmanx + ", cabrito=" + cabrito
+            + ", itensPeca=" + itensPeca + '}';
     }
 }

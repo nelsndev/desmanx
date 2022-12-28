@@ -3,17 +3,11 @@ package br.edu.ifpe.recife.model.negocio;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Embeddable;
+import javax.persistence.OneToOne;
 
-@Entity
+@Embeddable
 public class ItemPeca implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
 
     @Column(nullable = false)
     private Integer quantidade;
@@ -21,12 +15,11 @@ public class ItemPeca implements Serializable {
     @Column(length = 100)
     private String avaria;
 
-    public Long getId() {
-        return id;
-    }
+    @OneToOne
+    private Peca peca;
 
-    public void setId(Long id) {
-        this.id = id;
+    public ItemPeca() {
+        this.peca = new Peca();
     }
 
     public Integer getQuantidade() {
@@ -45,12 +38,20 @@ public class ItemPeca implements Serializable {
         this.avaria = avaria;
     }
 
+    public Peca getPeca() {
+        return peca;
+    }
+
+    public void setPeca(Peca peca) {
+        this.peca = peca;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
         hash = 37 * hash + Objects.hashCode(this.quantidade);
         hash = 37 * hash + Objects.hashCode(this.avaria);
+        hash = 37 * hash + Objects.hashCode(this.peca);
         return hash;
     }
 
@@ -69,10 +70,10 @@ public class ItemPeca implements Serializable {
         if (!Objects.equals(this.avaria, other.avaria)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.quantidade, other.quantidade)) {
             return false;
         }
-        if (!Objects.equals(this.quantidade, other.quantidade)) {
+        if (!Objects.equals(this.peca, other.peca)) {
             return false;
         }
         return true;
@@ -80,6 +81,7 @@ public class ItemPeca implements Serializable {
 
     @Override
     public String toString() {
-        return "ItemPeca{" + "id=" + id + ", quantidade=" + quantidade + ", avaria=" + avaria + '}';
+        return "ItemPeca{" + "quantidade=" + quantidade + ", avaria=" + avaria + ", peca="
+            + peca + '}';
     }
 }
