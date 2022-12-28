@@ -21,17 +21,20 @@
     </h2>
     <hr></hr>
 
-    <div style="display: flex; gap: 20px; max-width: 1000px; margin: 20px auto 0">
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: 20px auto 0">
       <c:forEach var="cabrito" items="#{cabritoCtrl.readAllNotFinished()}">
-        <p:card>
-          <h2 style="font-size: 20px; font-weight: 700; text-align: center">
+        <p:card style="width: 260px">
+          <h2 style="font-size: 20px; font-weight: 700;" align="center">
             #{cabrito.modelo.nome}
           </h2>
+
           <b:form>
-            <p:commandButton value="Realizar Desmanx" oncomplete="$('#cadastroDesmanx').modal('show')"
-                             update=":cadastroDesmanx" ajax="true" style="margin-top: 10px"
-                             actionListener="#{desmanxCtrl.preencheDesmanx(cabrito)}">
-            </p:commandButton>
+            <div align="center">
+              <p:commandButton value="Realizar Desmanx" oncomplete="$('#cadastroDesmanx').modal('show')"
+                               update=":cadastroDesmanx" ajax="true" style="margin-top: 10px"
+                               actionListener="#{desmanxCtrl.preencheDesmanx(cabrito)}">
+              </p:commandButton>
+            </div>
           </b:form>
         </p:card>
       </c:forEach>

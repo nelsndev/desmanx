@@ -58,7 +58,7 @@ public class CabritoController {
 
     public List<Cabrito> readAllNotFinished() {
         return ManagerDao.getInstance().read(
-            "SELECT c FROM Cabrito c WHERE c.desmanxFinalizado = false ORDER BY c.dataRoubo",
+            "SELECT c FROM Cabrito c WHERE c.desmanxFinalizado = false ORDER BY c.dataRoubo DESC",
             Cabrito.class);
     }
 
