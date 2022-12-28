@@ -12,10 +12,6 @@
   </h:head>
 
   <h:body>
-    <c:if test="#{loginCtrl.puxadorLogado eq null}">
-      <script>location.href = "index.xhtml";</script>
-    </c:if>
-
     <ui:include src="menuPuxador.xhtml"/>
 
     <div style="display: flex; gap: 20px; max-width: 1000px; margin: 50px auto 0">

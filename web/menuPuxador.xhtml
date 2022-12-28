@@ -10,7 +10,7 @@
     <title>Menu Puxador</title>
   </h:head>
   <h:body>
-    <c:if test="#{loginCtrl.puxadorLogado eq null}">
+    <c:if test="#{loginCtrl.puxadorLogado eq null or loginCtrl.puxadorLogado.codinome eq 'admin'}">
       <script>location.href = "index.xhtml";</script>
     </c:if>
 

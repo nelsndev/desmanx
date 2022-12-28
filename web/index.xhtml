@@ -10,11 +10,15 @@
   </h:head>
 
   <h:body>
-    <b:growl delay="3000"/>
-
-    <c:if test="#{loginCtrl.puxadorLogado ne null}">
+    <c:if test="#{loginCtrl.puxadorLogado ne null and loginCtrl.puxadorLogado.codinome ne 'admin'}">
       <script>location.href = "indexPuxador.xhtml";</script>
     </c:if>
+
+    <c:if test="#{loginCtrl.puxadorLogado ne null and loginCtrl.puxadorLogado.codinome eq 'admin'}">
+      <script>location.href = "indexAdministrador.xhtml";</script>
+    </c:if>
+
+    <b:growl delay="3000"/>
 
     <b:jumbotron>
       <h1 style="text-align: center">Desmanx</h1>
