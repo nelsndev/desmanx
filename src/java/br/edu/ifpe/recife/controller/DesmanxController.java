@@ -55,6 +55,11 @@ public class DesmanxController {
         this.desmanx.setDataDesmanx(new Date());
     }
 
+    public List<Desmanx> readAllOrderByDate() {
+        return ManagerDao.getInstance().read(
+            "SELECT d FROM Desmanx d ORDER BY d.dataDesmanx DESC", Desmanx.class);
+    }
+
     public void create() {
         addDesmanxFinalizadoTrue(this.desmanx.getCabrito());
         ManagerDao.getInstance().create(this.desmanx);

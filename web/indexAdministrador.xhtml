@@ -77,5 +77,53 @@
       Finalizados
     </h2>
     <hr></hr>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: 20px auto">
+      <c:forEach var="desmanx" items="#{desmanxCtrl.readAllOrderByDate()}">
+        <p:card style="width: 260px">
+          <h2 style="font-size: 20px; font-weight: 700;" align="center">
+            #{desmanx.cabrito.modelo.nome}
+          </h2>
+
+          <b:form>
+            <div align="center">
+              <p:commandButton icon="pi pi-eye" oncomplete="$('#visualizacaoDesmanx').modal('show')"
+                               update=":visualizacaoDesmanx" ajax="true" style="width: 50px">
+                <f:setPropertyActionListener value="#{desmanx}" target="#{desmanxCtrl.selecionado}"/>
+              </p:commandButton>
+            </div>
+          </b:form>
+        </p:card>
+      </c:forEach>
+    </div>
+
+    <b:modal id="visualizacaoDesmanx" title="Desmanx">
+      <b:form>
+        <p:panelGrid columns="2">
+          <h:outputText value="Data"/>
+          <h:outputText value="#{desmanxCtrl.selecionado.dataDesmanx}"/>
+
+          <h:outputText value="Modelo"/>
+          <h:outputText value="#{desmanxCtrl.selecionado.cabrito.modelo.nome}"/>
+
+          <h:outputText value="Puxador"/>
+          <h:outputText value="#{desmanxCtrl.selecionado.cabrito.puxador.nome}"/>
+        </p:panelGrid>
+
+        <p:panelGrid columns="3" style="margin-top: 10px">
+          <f:facet name="header">Peças</f:facet>
+
+          <h:outputText value="Nome" style="font-weight: 700"/>
+          <h:outputText value="Quantidade" style="font-weight: 700; margin-left: 70px"/>
+          <h:outputText value="Avaria" style="font-weight: 700; margin-left: 80px"/>
+
+          <c:forEach var="itemPeca" items="#{desmanxCtrl.selecionado.itensPeca}">
+            <h:outputText value="#{itemPeca.peca.nome}"/>
+            <h:outputText value="#{itemPeca.quantidade}"/>
+            <h:outputText value="#{itemPeca.avaria}"/>
+          </c:forEach>
+        </p:panelGrid>
+      </b:form>
+    </b:modal>
   </h:body>
 </html>
