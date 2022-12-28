@@ -53,6 +53,12 @@ public class CabritoController {
         return ManagerDao.getInstance().read(query, Cabrito.class);
     }
 
+    public List<Cabrito> readAllNotFinished() {
+        return ManagerDao.getInstance().read(
+            "SELECT c FROM Cabrito c WHERE c.desmanxFinalizado = false ORDER BY c.dataRoubo",
+            Cabrito.class);
+    }
+
     public void update() {
         ManagerDao.getInstance().update(this.selecionado);
         FacesContext.getCurrentInstance()
