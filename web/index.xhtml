@@ -24,15 +24,15 @@
               closable="false" closeOnEscape="false" modal="false">
       <b:form id="formLogin">
         <b:panelGrid columns="1">
-          <h:outputText value="Login"/>
-          <b:inputText value="#{login}"/>
+          <h:outputText value="Codinome"/>
+          <b:inputText value="#{codinome}"/>
 
           <h:outputText value="Senha"/>
           <b:inputSecret value="#{senha}"/>
         </b:panelGrid>
 
         <b:commandButton value="Logar" style-class="btn btn-primary"
-                         action="#{loginCtrl.loga(login, senha)}"/>
+                         action="#{loginCtrl.loga(codinome, senha)}"/>
 
         <b:link value="Cadastre-se" onclick="$('#modalCadastro').modal('show')"
                 style="margin-left: 15px"/>

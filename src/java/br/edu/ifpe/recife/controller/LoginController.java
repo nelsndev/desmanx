@@ -35,7 +35,8 @@ public class LoginController {
 
         if (!puxadores.isEmpty()) {
             this.puxadorLogado = puxadores.get(0);
-            return "indexPuxador";
+            return this.puxadorLogado.getCodinome().equals("admin")
+                ? "indexAdministrador" : "indexPuxador";
         }
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(

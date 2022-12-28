@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+  <h:head>
+    <title>Menu Administrador</title>
+  </h:head>
+
+  <h:body>
+    <c:if test="#{loginCtrl.puxadorLogado eq null or loginCtrl.puxadorLogado.codinome ne 'admin'}">
+      <script>location.href = "index.xhtml";</script>
+    </c:if>
+
+    <b:growl delay="3000"/>
+
+    <b:form id="formMenuAdministradorr">
+      <b:navBar fluid="true">
+        <b:navbarLinks>
+          <b:navLink value="Início" href="indexAdministrador.xhtml"/>
+        </b:navbarLinks>
+
+        <b:navbarLinks style="float: right" pull="right">
+          <b:dropMenu value="Admin">
+            <b:navCommandLink value="Sair" action="#{loginCtrl.desloga()}"/>
+          </b:dropMenu>
+        </b:navbarLinks>
+      </b:navBar>
+    </b:form>
+  </h:body>
+</html>
