@@ -3,6 +3,7 @@ package br.edu.ifpe.recife.controller;
 import br.edu.ifpe.recife.model.dao.ManagerDao;
 import br.edu.ifpe.recife.model.negocio.Cabrito;
 import br.edu.ifpe.recife.model.negocio.Puxador;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -49,7 +50,8 @@ public class CabritoController {
     }
 
     public List<Cabrito> readAllByPuxador(Puxador puxador) {
-        String query = String.format("SELECT c FROM Cabrito c WHERE c.puxador.id = %s", puxador.getId());
+        String query = String.format("SELECT c FROM Cabrito c WHERE c.puxador.id = %s"
+            + " ORDER BY c.desmanxFinalizado, c.dataRoubo DESC", puxador.getId());
         return ManagerDao.getInstance().read(query, Cabrito.class);
     }
 
