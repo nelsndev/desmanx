@@ -43,6 +43,7 @@ public class CabritoController {
     public void create(Puxador puxador) {
         this.cabrito.setPuxador(puxador);
         this.cabrito.setDesmanxFinalizado(false);
+        this.cabrito.setDataRoubo(new Date());
         ManagerDao.getInstance().create(this.cabrito);
         this.cabrito = new Cabrito();
         FacesContext.getCurrentInstance()
