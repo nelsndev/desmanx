@@ -42,34 +42,34 @@
                 <f:setPropertyActionListener value="#{cabrito}" target="#{cabritoCtrl.selecionado}"/>
               </p:commandButton>
             </b:form>
-
-            <b:modal id="modalVisualizacao" class="visualizacao" title="Modelo">
-              <b:form>
-                <p:panelGrid columns="2">
-                  <h:outputText value="Nome"/>
-                  <h:outputText value="#{cabritoCtrl.selecionado.modelo.nome}"/>
-
-                  <h:outputText value="Fabricante"/>
-                  <h:outputText value="#{cabritoCtrl.selecionado.modelo.fabricante}"/>
-
-                  <h:outputText value="Tipo"/>
-                  <h:outputText value="#{cabritoCtrl.selecionado.modelo.tipo}"/>
-                </p:panelGrid>
-
-                <p:panelGrid columns="4" style="margin-top: 10px">
-                  <f:facet name="header">
-                    <h:outputText value="Peças"/>
-                  </f:facet>
-
-                  <c:forEach var="peca" items="#{cabritoCtrl.selecionado.modelo.pecas}">
-                    <h:outputText value="#{peca.nome}"/>
-                  </c:forEach>
-                </p:panelGrid>
-              </b:form>
-            </b:modal>
           </p:card>
         </c:forEach>
       </c:if>
     </div>
+
+    <b:modal id="modalVisualizacao" class="visualizacao" title="Modelo">
+      <b:form>
+        <p:panelGrid columns="2">
+          <h:outputText value="Nome"/>
+          <h:outputText value="#{cabritoCtrl.selecionado.modelo.nome}"/>
+
+          <h:outputText value="Fabricante"/>
+          <h:outputText value="#{cabritoCtrl.selecionado.modelo.fabricante}"/>
+
+          <h:outputText value="Tipo"/>
+          <h:outputText value="#{cabritoCtrl.selecionado.modelo.tipo}"/>
+        </p:panelGrid>
+
+        <p:panelGrid columns="4" style="margin-top: 10px">
+          <f:facet name="header">
+            <h:outputText value="Peças"/>
+          </f:facet>
+
+          <c:forEach var="peca" items="#{cabritoCtrl.selecionado.modelo.pecas}">
+            <h:outputText value="#{peca.nome}"/>
+          </c:forEach>
+        </p:panelGrid>
+      </b:form>
+    </b:modal>
   </h:body>
 </html>
