@@ -16,7 +16,6 @@ public class ItemPeca implements Serializable {
     private String avaria;
 
     @OneToOne
-    @Column(nullable = false)
     private Peca peca;
 
     public ItemPeca() {

@@ -15,10 +15,10 @@ public class Puxador implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(nullable = false, length = 15)
+    @Column(length = 15)
     private String cpf;
 
-    @Column(nullable = false, length = 70)
+    @Column(length = 70)
     private String nome;
 
     @Column(nullable = false, length = 20)

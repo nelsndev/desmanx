@@ -22,7 +22,7 @@ public class Cabrito implements Serializable {
     @Column(length = 7)
     private String placa;
 
-    @Column(nullable = false, length = 17)
+    @Column(length = 17)
     private String chassi;
 
     @Column(length = 5)
