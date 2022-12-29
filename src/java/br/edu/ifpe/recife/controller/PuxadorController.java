@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "puxadorCtrl")
 @SessionScoped
@@ -59,6 +60,12 @@ public class PuxadorController {
         ManagerDao.getInstance().update(this.selecionado);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Puxador alterado com sucesso!"));
+    }
+
+    public void alteraInformacoes(Puxador puxador) {
+        ManagerDao.getInstance().update(puxador);
+        FacesContext.getCurrentInstance()
+            .addMessage(null, new FacesMessage("Informações alteradas com sucesso!"));
     }
 
     public void delete() {

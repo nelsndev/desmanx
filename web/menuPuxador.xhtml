@@ -24,8 +24,12 @@
         </b:navbarLinks>
 
         <b:navbarLinks style="float: right" pull="right">
-          <b:dropMenu value=" #{loginCtrl.puxadorLogado.codinome}">
-            <b:navCommandLink value="Sair" action="#{loginCtrl.desloga()}" oncomplete=""/>
+          <b:dropMenu value=" #{loginCtrl.puxadorLogado.codinome} ">
+            <b:navCommandLink value="Sair" action="#{loginCtrl.desloga()}"/>
+
+            <b:navLink value="Alterar Info" onclick="$('#modalAlteracao').modal('show')"/>
+
+            <b:navLink value="Mudar Senha"/>
           </b:dropMenu>
         </b:navbarLinks>
       </b:navBar>
@@ -72,6 +76,39 @@
           <b:button value="Cancelar" dismiss="modal" look="danger"
                     style="display: inline-block; margin-left: 10px;"/>
         </div>
+      </b:form>
+    </b:modal>
+
+    <b:modal id="modalAlteracao" title="Alteração de Informações">
+      <b:form>
+        <h:outputText value="CPF"/>
+        <b:inputText value="#{loginCtrl.puxadorLogado.cpf}"/>
+
+        <h:outputText value="Nome"/>
+        <b:inputText value="#{loginCtrl.puxadorLogado.nome}"/>
+
+        <h:outputText value="Telefone"/>
+        <b:inputText value="#{loginCtrl.puxadorLogado.telefone}"/>
+
+        <h:outputText value="Endereço"/>
+        <b:inputText value="#{loginCtrl.puxadorLogado.endereco}"/>
+
+        <h:outputText value="Endereço da Mãe"/>
+        <b:inputText value="#{loginCtrl.puxadorLogado.enderecoMae}"/>
+
+        <h:outputText value="Quantidade de Prisões"/>
+        <b:inputText value="#{loginCtrl.puxadorLogado.quantidadePrisoes}"/>
+
+        <h:outputText value="Especialidade de Roubo"/>
+        <b:inputText value="#{loginCtrl.puxadorLogado.especialidadeRoubo}"/>
+
+        <h:outputText value="Anos de Experiência"/>
+        <b:inputText value="#{loginCtrl.puxadorLogado.anosExperiencia}"/>
+
+        <b:commandButton value="Alterar" look="success"
+                         action="#{puxadorCtrl.alteraInformacoes(loginCtrl.puxadorLogado)}"/>
+        <b:button value="Cancelar" dismiss="modal" look="danger"
+                  style="display: inline-block; margin-left: 10px;"/>
       </b:form>
     </b:modal>
   </h:body>
