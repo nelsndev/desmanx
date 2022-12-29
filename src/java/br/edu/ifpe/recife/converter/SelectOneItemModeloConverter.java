@@ -1,4 +1,4 @@
-package br.edu.ifpe.recife.controller;
+package br.edu.ifpe.recife.converter;
 
 import br.edu.ifpe.recife.model.dao.ManagerDao;
 import br.edu.ifpe.recife.model.negocio.Modelo;
