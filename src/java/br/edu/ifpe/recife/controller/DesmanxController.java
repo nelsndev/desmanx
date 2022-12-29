@@ -61,11 +61,27 @@ public class DesmanxController {
     }
 
     public void create() {
-        addDesmanxFinalizadoTrue(this.desmanx.getCabrito());
-        ManagerDao.getInstance().create(this.desmanx);
-        this.desmanx = new Desmanx();
-        FacesContext.getCurrentInstance()
-            .addMessage(null, new FacesMessage("Desmanx realizado com sucesso!"));
+        if (isItensPecaValido(this.desmanx.getItensPeca())) {
+            addDesmanxFinalizadoTrue(this.desmanx.getCabrito());
+            ManagerDao.getInstance().create(this.desmanx);
+            FacesContext.getCurrentInstance()
+                .addMessage(null, new FacesMessage("Desmanx realizado com sucesso!"));
+            this.desmanx = new Desmanx();
+            return;
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+            FacesMessage.SEVERITY_ERROR,
+            "Campo QUANTIDADE não pode ser vazio ou menor que zero", ""));
+    }
+
+    public boolean isItensPecaValido(List<ItemPeca> itensPeca) {
+        for (ItemPeca ip : itensPeca) {
+            if (ip.getQuantidade() == null || ip.getQuantidade() < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void addDesmanxFinalizadoTrue(Cabrito cabrito) {
