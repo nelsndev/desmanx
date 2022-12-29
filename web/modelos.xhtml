@@ -86,22 +86,22 @@
     <b:modal id="modalVisualizacao" class="visualizacao" title="Modelo Visualização">
       <b:form>
         <p:panelGrid columns="2">
-          <h:outputText value="ID"/>
+          <h:outputText value="ID" style="font-weight: 700"/>
           <h:outputText value="#{modeloCtrl.selecionado.id}"/>
 
-          <h:outputText value="Nome"/>
+          <h:outputText value="Nome" style="font-weight: 700"/>
           <h:outputText value="#{modeloCtrl.selecionado.nome}"/>
 
-          <h:outputText value="Fabricante"/>
+          <h:outputText value="Fabricante" style="font-weight: 700"/>
           <h:outputText value="#{modeloCtrl.selecionado.fabricante}"/>
 
-          <h:outputText value="Tipo"/>
+          <h:outputText value="Tipo" style="font-weight: 700"/>
           <h:outputText value="#{modeloCtrl.selecionado.tipo}"/>
 
-          <h:outputText value="Potência do Motor"/>
+          <h:outputText value="Potência do Motor" style="font-weight: 700"/>
           <h:outputText value="#{modeloCtrl.selecionado.motorPotencia}"/>
 
-          <h:outputText value="Cilindrada do Motor"/>
+          <h:outputText value="Cilindrada do Motor" style="font-weight: 700"/>
           <h:outputText value="#{modeloCtrl.selecionado.motorCilindrada}"/>
         </p:panelGrid>
 
@@ -120,8 +120,8 @@
     <b:modal id="modalAlteracao" class="alteracao" title="Modelo Alteração">
       <b:form>
         <div style="display: flex; margin-bottom: 5px;">
-          <h:outputText value="ID"/>
-          <h:outputText value="#{pecaCtrl.selecionada.id}" style="margin-left: 10px;"/>
+          <h:outputText value="ID" style="font-weight: 700"/>
+          <h:outputText value="#{modeloCtrl.selecionado.id}" style="margin-left: 10px;"/>
         </div>
 
         <h:outputText value="Nome"/>
