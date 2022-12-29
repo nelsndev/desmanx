@@ -52,7 +52,6 @@ public class DesmanxController {
             itensPeca.add(itemPeca);
         }
         this.desmanx.setItensPeca(itensPeca);
-        this.desmanx.setDataDesmanx(new Date());
     }
 
     public List<Desmanx> readAllOrderByDate() {
@@ -63,6 +62,7 @@ public class DesmanxController {
     public void create() {
         if (isItensPecaValido(this.desmanx.getItensPeca())) {
             addDesmanxFinalizadoTrue(this.desmanx.getCabrito());
+            this.desmanx.setDataDesmanx(new Date());
             ManagerDao.getInstance().create(this.desmanx);
             FacesContext.getCurrentInstance()
                 .addMessage(null, new FacesMessage("Desmanx realizado com sucesso!"));
