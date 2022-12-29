@@ -51,7 +51,7 @@ public class PuxadorController {
     }
 
     public void update(String confirmacao) {
-        if (!this.puxador.getSenha().equals(confirmacao)) {
+        if (!this.selecionado.getSenha().equals(confirmacao)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
             return;
