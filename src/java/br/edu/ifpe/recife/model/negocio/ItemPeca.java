@@ -9,13 +9,14 @@ import javax.persistence.OneToOne;
 @Embeddable
 public class ItemPeca implements Serializable {
 
-    @Column(nullable = false)
+    @Column(name = "QUANTIDADE_PECA")
     private Integer quantidade;
 
     @Column(length = 100)
     private String avaria;
 
     @OneToOne
+    @Column(nullable = false)
     private Peca peca;
 
     public ItemPeca() {

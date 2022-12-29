@@ -72,12 +72,12 @@ public class DesmanxController {
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
             FacesMessage.SEVERITY_ERROR,
-            "Campo QUANTIDADE não pode ser vazio ou menor que zero", ""));
+            "Campo QUANTIDADE não pode menor que zero", ""));
     }
 
     public boolean isItensPecaValido(List<ItemPeca> itensPeca) {
         for (ItemPeca ip : itensPeca) {
-            if (ip.getQuantidade() == null || ip.getQuantidade() < 0) {
+            if (ip.getQuantidade() != null && ip.getQuantidade() < 0) {
                 return false;
             }
         }
