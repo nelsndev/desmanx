@@ -51,17 +51,47 @@
       </c:if>
     </div>
 
-    <b:modal id="modalVisualizacao" class="visualizacao" title="Modelo">
+    <b:modal id="modalVisualizacao" class="visualizacao" title="Cabrito">
       <b:form>
         <p:panelGrid columns="2">
-          <h:outputText value="Nome"/>
+          <h:outputText value="Modelo" style="font-weight: 700"/>
           <h:outputText value="#{cabritoCtrl.selecionado.modelo.nome}"/>
 
-          <h:outputText value="Fabricante"/>
+          <h:outputText value="Fabricante" style="font-weight: 700"/>
           <h:outputText value="#{cabritoCtrl.selecionado.modelo.fabricante}"/>
 
-          <h:outputText value="Tipo"/>
-          <h:outputText value="#{cabritoCtrl.selecionado.modelo.tipo}"/>
+          <h:outputText value="Placa" style="font-weight: 700"/>
+          <c:choose>
+            <c:when test="#{cabritoCtrl.selecionado.placa eq null}">
+              <h:outputText value="Não informado"/>
+            </c:when>
+
+            <c:otherwise>
+              <h:outputText value="#{cabritoCtrl.selecionado.placa}"/>
+            </c:otherwise>
+          </c:choose>
+
+          <h:outputText value="Tipo de Câmbio" style="font-weight: 700"/>
+          <c:choose>
+            <c:when test="#{cabritoCtrl.selecionado.tipoCambio eq null}">
+              <h:outputText value="Não informado"/>
+            </c:when>
+
+            <c:otherwise>
+              <h:outputText value="#{cabritoCtrl.selecionado.tipoCambio}"/>
+            </c:otherwise>
+          </c:choose>
+
+          <h:outputText value="Tipo de Combustível" style="font-weight: 700"/>
+          <c:choose>
+            <c:when test="#{cabritoCtrl.selecionado.tipoCombustivel eq null}">
+              <h:outputText value="Não informado"/>
+            </c:when>
+
+            <c:otherwise>
+              <h:outputText value="#{cabritoCtrl.selecionado.tipoCombustivel}"/>
+            </c:otherwise>
+          </c:choose>
         </p:panelGrid>
 
         <p:panelGrid columns="4" style="margin-top: 10px">
