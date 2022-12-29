@@ -19,7 +19,7 @@
     <h2 style="font-size: 20px; font-weight: 800; color: #f01d1d; margin-left: 100px; margin-top: 50px">
       Pendentes
     </h2>
-    <hr></hr>
+    <hr style="border: 1px solid gray"></hr>
 
     <div style="display: flex; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: 20px auto 0">
       <c:forEach var="cabrito" items="#{cabritoCtrl.readAllNotFinished()}">
@@ -73,10 +73,10 @@
       </b:form>
     </b:modal>
 
-    <h2 style="font-size: 20px; font-weight: 800; margin-left: 100px; margin-top: 50px">
+    <h2 style="font-size: 20px; font-weight: 800; margin-left: 100px; margin-top: 80px">
       Finalizados
     </h2>
-    <hr></hr>
+    <hr style="border: 1px solid gray"></hr>
 
     <div style="display: flex; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: 20px auto">
       <c:forEach var="desmanx" items="#{desmanxCtrl.readAllOrderByDate()}">
