@@ -43,19 +43,22 @@
     <b:modal id="cadastroDesmanx" title="Realizar Desmanx">
       <b:form>
         <p:panelGrid columns="2">
-          <h:outputText value="Modelo"/>
+          <h:outputText value="Data Desmanx" style="font-weight: 700"/>
+          <h:outputText value="#{desmanxCtrl.desmanx.dataDesmanx}"/>
+
+          <h:outputText value="Modelo" style="font-weight: 700"/>
           <h:outputText value="#{desmanxCtrl.desmanx.cabrito.modelo.nome}"/>
 
-          <h:outputText value="Data Desmanx"/>
-          <h:outputText value="#{desmanxCtrl.desmanx.dataDesmanx}"/>
+          <h:outputText value="Puxador" style="font-weight: 700"/>
+          <h:outputText value="#{desmanxCtrl.desmanx.cabrito.puxador.nome}"/>
         </p:panelGrid>
 
         <p:panelGrid columns="3" style="margin-top: 10px">
           <f:facet name="header">Peças</f:facet>
 
           <h:outputText value="Nome" style="font-weight: 700"/>
-          <h:outputText value="Quantidade" style="font-weight: 700; margin-left: 70px"/>
-          <h:outputText value="Avaria" style="font-weight: 700; margin-left: 80px"/>
+          <h:outputText value="Quantidade" style="font-weight: 700"/>
+          <h:outputText value="Avaria" style="font-weight: 700"/>
 
           <c:forEach var="itemPeca" items="#{desmanxCtrl.desmanx.itensPeca}">
             <h:outputText value="#{itemPeca.peca.nome}"/>
@@ -100,13 +103,13 @@
     <b:modal id="visualizacaoDesmanx" title="Desmanx">
       <b:form>
         <p:panelGrid columns="2">
-          <h:outputText value="Data"/>
+          <h:outputText value="Data" style="font-weight: 700"/>
           <h:outputText value="#{desmanxCtrl.selecionado.dataDesmanx}"/>
 
-          <h:outputText value="Modelo"/>
+          <h:outputText value="Modelo" style="font-weight: 700"/>
           <h:outputText value="#{desmanxCtrl.selecionado.cabrito.modelo.nome}"/>
 
-          <h:outputText value="Puxador"/>
+          <h:outputText value="Puxador" style="font-weight: 700"/>
           <h:outputText value="#{desmanxCtrl.selecionado.cabrito.puxador.nome}"/>
         </p:panelGrid>
 
@@ -114,8 +117,8 @@
           <f:facet name="header">Peças</f:facet>
 
           <h:outputText value="Nome" style="font-weight: 700"/>
-          <h:outputText value="Quantidade" style="font-weight: 700; margin-left: 70px"/>
-          <h:outputText value="Avaria" style="font-weight: 700; margin-left: 80px"/>
+          <h:outputText value="Quantidade" style="font-weight: 700"/>
+          <h:outputText value="Avaria" style="font-weight: 700"/>
 
           <c:forEach var="itemPeca" items="#{desmanxCtrl.selecionado.itensPeca}">
             <h:outputText value="#{itemPeca.peca.nome}"/>
