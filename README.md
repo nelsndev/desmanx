@@ -1,9 +1,14 @@
-# desmanx [Disciplina WEB 3]
+# Desmanx
+
+Projeto Desmanx realizado como atividade da disciplina **Desenvolvimento WEB 3.**
+
 ## Tecnologias envolvidas
+
+- Java 8
 - JSF 2.2
+- JSTL 1.2.1
 - PrimeFaces 12.0.0
 - BootsFaces 1.5.0
-- Java 8
-- EclipseLink (JPA 2.1)
+- JPA 2.1 (EclipseLink)
 - Mysql 5.7.30
 - Servidor Apache Tomcat 8.0.27
