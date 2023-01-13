@@ -91,7 +91,6 @@ public class DesmanxController {
         ManagerDao.getInstance().update(cabrito);
 
         this.desmanx.setDataDesmanx(new Date());
-
         ManagerDao.getInstance().create(this.desmanx);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Desmanx realizado com sucesso!"));
