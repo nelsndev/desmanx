@@ -43,15 +43,24 @@ public class DesmanxController {
         this.selecionado = selecionado;
     }
 
+    /**
+     * O usuário administrador deve apenas se preocupar com a adição da quantidade de peças durante
+     * a realização do desmanx. Para isso, este método adicionará o cabrito selecionado e suas peças
+     * ao desmanx que será realizado.
+     *
+     * @param cabrito
+     */
     public void preencheDesmanx(Cabrito cabrito) {
-        this.desmanx.setCabrito(cabrito);
-        List<ItemPeca> itensPeca = new ArrayList<>();
+        List<ItemPeca> itemPecaList = new ArrayList<>();
+
         for (Peca peca : cabrito.getModelo().getPecas()) {
             ItemPeca itemPeca = new ItemPeca();
             itemPeca.setPeca(peca);
-            itensPeca.add(itemPeca);
+            itemPecaList.add(itemPeca);
         }
-        this.desmanx.setItensPeca(itensPeca);
+
+        this.desmanx.setCabrito(cabrito);
+        this.desmanx.setItensPeca(itemPecaList);
     }
 
     public List<Desmanx> readAllOrderByDate() {
