@@ -94,7 +94,6 @@ public class PuxadorController {
         }
 
         puxadorLogado.setSenha(novaSenha);
-
         ManagerDao.getInstance().update(puxadorLogado);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Senha alterada com sucesso!"));
