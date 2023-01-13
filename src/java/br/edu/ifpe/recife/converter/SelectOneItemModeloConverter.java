@@ -15,7 +15,9 @@ public class SelectOneItemModeloConverter implements Converter {
         if (string == null) {
             return null;
         }
+
         String query = String.format("SELECT m FROM Modelo m WHERE m.id = %s", string);
+
         return ManagerDao.getInstance().read(query, Modelo.class).get(0);
     }
 
@@ -24,6 +26,7 @@ public class SelectOneItemModeloConverter implements Converter {
         if (o == null) {
             return null;
         }
+
         return ((Modelo) o).getId().toString();
     }
 }

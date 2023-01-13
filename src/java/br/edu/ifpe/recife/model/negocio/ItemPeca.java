@@ -49,9 +49,11 @@ public class ItemPeca implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+
         hash = 37 * hash + Objects.hashCode(this.quantidade);
         hash = 37 * hash + Objects.hashCode(this.avaria);
         hash = 37 * hash + Objects.hashCode(this.peca);
+
         return hash;
     }
 
@@ -76,6 +78,7 @@ public class ItemPeca implements Serializable {
         if (!Objects.equals(this.peca, other.peca)) {
             return false;
         }
+
         return true;
     }
 

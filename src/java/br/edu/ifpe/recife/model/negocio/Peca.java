@@ -70,11 +70,13 @@ public class Peca implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+
         hash = 67 * hash + Objects.hashCode(this.id);
         hash = 67 * hash + Objects.hashCode(this.nome);
         hash = 67 * hash + Objects.hashCode(this.funcao);
         hash = 67 * hash + Objects.hashCode(this.tipo);
         hash = 67 * hash + Objects.hashCode(this.observacao);
+
         return hash;
     }
 
@@ -105,6 +107,7 @@ public class Peca implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+
         return true;
     }
 

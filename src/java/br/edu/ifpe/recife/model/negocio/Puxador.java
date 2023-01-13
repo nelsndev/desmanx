@@ -136,6 +136,7 @@ public class Puxador implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+
         hash = 47 * hash + Objects.hashCode(this.id);
         hash = 47 * hash + Objects.hashCode(this.cpf);
         hash = 47 * hash + Objects.hashCode(this.nome);
@@ -147,6 +148,7 @@ public class Puxador implements Serializable {
         hash = 47 * hash + Objects.hashCode(this.especialidadeRoubo);
         hash = 47 * hash + Objects.hashCode(this.anosExperiencia);
         hash = 47 * hash + Objects.hashCode(this.senha);
+
         return hash;
     }
 
@@ -195,6 +197,7 @@ public class Puxador implements Serializable {
         if (!Objects.equals(this.senha, other.senha)) {
             return false;
         }
+
         return true;
     }
 

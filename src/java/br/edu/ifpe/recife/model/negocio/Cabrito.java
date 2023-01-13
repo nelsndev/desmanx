@@ -156,6 +156,7 @@ public class Cabrito implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
+
         hash = 29 * hash + Objects.hashCode(this.id);
         hash = 29 * hash + Objects.hashCode(this.placa);
         hash = 29 * hash + Objects.hashCode(this.chassi);
@@ -168,6 +169,7 @@ public class Cabrito implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.desmanxFinalizado);
         hash = 29 * hash + Objects.hashCode(this.modelo);
         hash = 29 * hash + Objects.hashCode(this.puxador);
+
         return hash;
     }
 
@@ -219,6 +221,7 @@ public class Cabrito implements Serializable {
         if (!Objects.equals(this.puxador, other.puxador)) {
             return false;
         }
+
         return true;
     }
 

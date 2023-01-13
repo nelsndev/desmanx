@@ -44,15 +44,18 @@ public class CabritoController {
         this.cabrito.setPuxador(puxador);
         this.cabrito.setDesmanxFinalizado(false);
         this.cabrito.setDataRoubo(new Date());
+
         ManagerDao.getInstance().create(this.cabrito);
-        this.cabrito = new Cabrito();
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Cabrito adicionado com sucesso!"));
+
+        this.cabrito = new Cabrito();
     }
 
     public List<Cabrito> readAllByPuxador(Puxador puxador) {
         String query = String.format("SELECT c FROM Cabrito c WHERE c.puxador.id = %s"
             + " ORDER BY c.desmanxFinalizado, c.dataRoubo DESC", puxador.getId());
+
         return ManagerDao.getInstance().read(query, Cabrito.class);
     }
 

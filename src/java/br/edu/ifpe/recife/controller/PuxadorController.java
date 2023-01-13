@@ -43,20 +43,25 @@ public class PuxadorController {
         if (!this.puxador.getSenha().equals(confirmacao)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
+
             return;
         }
+
         ManagerDao.getInstance().create(this.puxador);
-        this.puxador = new Puxador();
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Puxador cadastrado com sucesso!"));
+
+        this.puxador = new Puxador();
     }
 
     public void update(String confirmacao) {
         if (!this.selecionado.getSenha().equals(confirmacao)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
+
             return;
         }
+
         ManagerDao.getInstance().update(this.selecionado);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Puxador alterado com sucesso!"));

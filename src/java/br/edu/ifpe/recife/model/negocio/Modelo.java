@@ -99,6 +99,7 @@ public class Modelo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
+
         hash = 83 * hash + Objects.hashCode(this.id);
         hash = 83 * hash + Objects.hashCode(this.nome);
         hash = 83 * hash + Objects.hashCode(this.fabricante);
@@ -106,6 +107,7 @@ public class Modelo implements Serializable {
         hash = 83 * hash + Objects.hashCode(this.motorPotencia);
         hash = 83 * hash + Objects.hashCode(this.motorCilindrada);
         hash = 83 * hash + Objects.hashCode(this.pecas);
+
         return hash;
     }
 
@@ -142,6 +144,7 @@ public class Modelo implements Serializable {
         if (!Objects.equals(this.pecas, other.pecas)) {
             return false;
         }
+
         return true;
     }
 

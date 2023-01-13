@@ -41,10 +41,12 @@ public class ModeloController {
 
     public void create(List<Peca> pecas) {
         this.modelo.setPecas(pecas);
+
         ManagerDao.getInstance().create(this.modelo);
-        this.modelo = new Modelo();
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Modelo cadastrado com sucesso!"));
+
+        this.modelo = new Modelo();
     }
 
     public void update() {
@@ -60,7 +62,6 @@ public class ModeloController {
     }
 
     public List<Modelo> readAll() {
-        return ManagerDao.getInstance()
-            .read("SELECT m FROM Modelo m", Modelo.class);
+        return ManagerDao.getInstance().read("SELECT m FROM Modelo m", Modelo.class);
     }
 }

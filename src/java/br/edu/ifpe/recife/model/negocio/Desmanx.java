@@ -73,10 +73,12 @@ public class Desmanx implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
+
         hash = 29 * hash + Objects.hashCode(this.id);
         hash = 29 * hash + Objects.hashCode(this.dataDesmanx);
         hash = 29 * hash + Objects.hashCode(this.cabrito);
         hash = 29 * hash + Objects.hashCode(this.itensPeca);
+
         return hash;
     }
 
@@ -104,6 +106,7 @@ public class Desmanx implements Serializable {
         if (!Objects.equals(this.itensPeca, other.itensPeca)) {
             return false;
         }
+
         return true;
     }
 
