@@ -74,29 +74,30 @@ public class PuxadorController {
     }
 
     public void alteraSenha(String senhaAtual, String novaSenha, String confirmacao) {
-        Puxador puxador = puxadorLogadoFromSession();
-
-        if (senhaAtual.equals(puxador.getSenha())) {
-            if (novaSenha.equals(confirmacao)) {
-                puxador.setSenha(novaSenha);
-                ManagerDao.getInstance().update(puxador);
-                FacesContext.getCurrentInstance()
-                    .addMessage(null, new FacesMessage("Senha alterada com sucesso!"));
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                    FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
-            }
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                FacesMessage.SEVERITY_ERROR, "Senha atual incorreta", ""));
-        }
-    }
-
-    public Puxador puxadorLogadoFromSession() {
         HttpSession hs = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
             .getSession(true);
         LoginController lc = (LoginController) hs.getAttribute("loginCtrl");
-        return lc.getPuxadorLogado();
+        Puxador puxadorLogado = lc.getPuxadorLogado();
+
+        if (!senhaAtual.equals(puxadorLogado.getSenha())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "Senha atual incorreta", ""));
+
+            return;
+        }
+
+        if (!novaSenha.equals(confirmacao)) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
+
+            return;
+        }
+
+        puxadorLogado.setSenha(novaSenha);
+
+        ManagerDao.getInstance().update(puxadorLogado);
+        FacesContext.getCurrentInstance()
+            .addMessage(null, new FacesMessage("Senha alterada com sucesso!"));
     }
 
     public void delete() {
