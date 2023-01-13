@@ -115,13 +115,13 @@
     <b:modal id="modalSenha" title="Mudar Senha">
       <b:form>
         <h:outputText value="Senha atual"/>
-        <b:inputText value="#{senhaAtual}"/>
+        <b:inputSecret value="#{senhaAtual}"/>
 
         <h:outputText value="Nova senha"/>
-        <b:inputText value="#{novaSenha}"/>
+        <b:inputSecret value="#{novaSenha}"/>
 
         <h:outputText value="Confirme nova senha"/>
-        <b:inputText value="#{confirmacao}"/>
+        <b:inputSecret value="#{confirmacao}"/>
 
         <b:commandButton value="Mudar" look="success"
                          action="#{puxadorCtrl.alteraSenha(senhaAtual, novaSenha, confirmacao)}"/>
