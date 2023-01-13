@@ -69,33 +69,23 @@ public class DesmanxController {
     }
 
     public void create() {
-        if (isItensPecaValido(this.desmanx.getItensPeca())) {
-            addDesmanxFinalizadoTrue(this.desmanx.getCabrito());
-            this.desmanx.setDataDesmanx(new Date());
-            ManagerDao.getInstance().create(this.desmanx);
-            FacesContext.getCurrentInstance()
-                .addMessage(null, new FacesMessage("Desmanx realizado com sucesso!"));
-            this.desmanx = new Desmanx();
-            return;
-        }
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-            FacesMessage.SEVERITY_ERROR,
-            "Campo QUANTIDADE não pode menor que zero", ""));
-    }
-
-    public boolean isItensPecaValido(List<ItemPeca> itensPeca) {
-        for (ItemPeca ip : itensPeca) {
-            if (ip.getQuantidade() != null && ip.getQuantidade() < 0) {
-                return false;
+        for (ItemPeca itemPeca : this.desmanx.getItensPeca()) {
+            if (itemPeca.getQuantidade() == null || itemPeca.getQuantidade() < 0) {
+                itemPeca.setQuantidade(0);
             }
         }
-        return true;
-    }
 
-    public void addDesmanxFinalizadoTrue(Cabrito cabrito) {
+        Cabrito cabrito = this.desmanx.getCabrito();
         cabrito.setDesmanxFinalizado(true);
         ManagerDao.getInstance().update(cabrito);
+
+        this.desmanx.setDataDesmanx(new Date());
+
+        ManagerDao.getInstance().create(this.desmanx);
+        FacesContext.getCurrentInstance()
+            .addMessage(null, new FacesMessage("Desmanx realizado com sucesso!"));
+
+        this.desmanx = new Desmanx();
     }
 
     public void update() {
