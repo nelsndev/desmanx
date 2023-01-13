@@ -69,10 +69,21 @@ public class DesmanxController {
     }
 
     public void create() {
-        for (ItemPeca itemPeca : this.desmanx.getItensPeca()) {
-            if (itemPeca.getQuantidade() == null || itemPeca.getQuantidade() < 0) {
+        List<ItemPeca> ItemPecaList = this.desmanx.getItensPeca();
+        int itensAusentesCount = 0;
+
+        for (ItemPeca itemPeca : ItemPecaList) {
+            if (itemPeca.getQuantidade() == null || itemPeca.getQuantidade() <= 0) {
                 itemPeca.setQuantidade(0);
+                itensAusentesCount++;
             }
+        }
+
+        if (itensAusentesCount == ItemPecaList.size()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "Não pode haver desmanx sem peças!", ""));
+
+            return;
         }
 
         Cabrito cabrito = this.desmanx.getCabrito();
