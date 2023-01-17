@@ -29,19 +29,17 @@ public class LoginController {
     }
 
     public String loga(String login, String senha) {
-        String puxadorQuery = String.format(
+        String query = String.format(
             "SELECT p FROM Puxador p WHERE p.codinome = '%s' AND p.senha = '%s'", login, senha);
-        List<Puxador> puxadores = ManagerDao.getInstance().read(puxadorQuery, Puxador.class);
+        List<Puxador> puxadores = ManagerDao.getInstance().read(query, Puxador.class);
 
         if (puxadores.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "Login ou senha inválidos", null));
-
             return "index";
         }
 
         this.puxadorLogado = puxadores.get(0);
-
         return this.puxadorLogado.getCodinome().equals("admin")
             ? "indexAdministrador" : "indexPuxador";
     }
