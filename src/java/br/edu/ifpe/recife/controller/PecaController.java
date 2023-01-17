@@ -58,9 +58,9 @@ public class PecaController {
 
     public void create() {
         ManagerDao.getInstance().create(this.peca);
-        this.peca = new Peca();
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Peça cadastrada com sucesso!"));
+        this.peca = new Peca();
     }
 
     public void update() {
