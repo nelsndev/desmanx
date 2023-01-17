@@ -68,6 +68,7 @@ public class DesmanxController {
     public void create() {
         List<ItemPeca> ItemPecaList = this.desmanx.getItensPeca();
         int itensAusentesCount = 0;
+
         for (ItemPeca itemPeca : ItemPecaList) {
             if (itemPeca.getQuantidade() == null || itemPeca.getQuantidade() <= 0) {
                 itemPeca.setQuantidade(0);
