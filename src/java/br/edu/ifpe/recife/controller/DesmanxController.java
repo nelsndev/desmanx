@@ -71,21 +71,19 @@ public class DesmanxController {
     public void create() {
         List<ItemPeca> ItemPecaList = this.desmanx.getItensPeca();
         int itensAusentesCount = 0;
-
         for (ItemPeca itemPeca : ItemPecaList) {
             if (itemPeca.getQuantidade() == null || itemPeca.getQuantidade() <= 0) {
                 itemPeca.setQuantidade(0);
                 itensAusentesCount++;
             }
         }
-
         if (itensAusentesCount == ItemPecaList.size()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "Não pode haver desmanx sem peças!", ""));
-
             return;
         }
 
+        // Adiciona o estado do desmanx do cabrito como finalizado.
         Cabrito cabrito = this.desmanx.getCabrito();
         cabrito.setDesmanxFinalizado(true);
         ManagerDao.getInstance().update(cabrito);
@@ -94,7 +92,6 @@ public class DesmanxController {
         ManagerDao.getInstance().create(this.desmanx);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Desmanx realizado com sucesso!"));
-
         this.desmanx = new Desmanx();
     }
 
