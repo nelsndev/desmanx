@@ -43,14 +43,12 @@ public class PuxadorController {
         if (!this.puxador.getSenha().equals(confirmacao)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
-
             return;
         }
 
         ManagerDao.getInstance().create(this.puxador);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Puxador cadastrado com sucesso!"));
-
         this.puxador = new Puxador();
     }
 
@@ -58,7 +56,6 @@ public class PuxadorController {
         if (!this.selecionado.getSenha().equals(confirmacao)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
-
             return;
         }
 
@@ -82,14 +79,12 @@ public class PuxadorController {
         if (!senhaAtual.equals(puxadorLogado.getSenha())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "Senha atual incorreta", ""));
-
             return;
         }
 
         if (!novaSenha.equals(confirmacao)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "A senha informada não confirma", ""));
-
             return;
         }
 

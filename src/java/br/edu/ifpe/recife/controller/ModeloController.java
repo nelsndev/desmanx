@@ -41,11 +41,9 @@ public class ModeloController {
 
     public void create(List<Peca> pecas) {
         this.modelo.setPecas(pecas);
-
         ManagerDao.getInstance().create(this.modelo);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Modelo cadastrado com sucesso!"));
-
         this.modelo = new Modelo();
     }
 
