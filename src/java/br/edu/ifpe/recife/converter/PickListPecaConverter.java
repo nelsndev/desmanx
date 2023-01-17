@@ -35,7 +35,6 @@ public class PickListPecaConverter implements Converter {
         if (o == null) {
             return null;
         }
-
         return ((Peca) o).getId().toString();
     }
 }
