@@ -27,28 +27,6 @@ public class DesmanxController {
         this.selecionado = null;
     }
 
-    public Desmanx getDesmanx() {
-        return desmanx;
-    }
-
-    public void setDesmanx(Desmanx desmanx) {
-        this.desmanx = desmanx;
-    }
-
-    public Desmanx getSelecionado() {
-        return selecionado;
-    }
-
-    public void setSelecionado(Desmanx selecionado) {
-        this.selecionado = selecionado;
-    }
-
-    /**
-     * Este método adiciona o cabrito bem como os ItemPeca relacionados ao seu modelo no desmanx que
-     * será criado.
-     *
-     * @param cabrito
-     */
     public void adicionaCabrito(Cabrito cabrito) {
         List<ItemPeca> itemPecaList = new ArrayList<>();
         for (Peca peca : cabrito.getModelo().getPecas()) {
@@ -81,7 +59,7 @@ public class DesmanxController {
             return;
         }
 
-        // Adiciona o estado do desmanx do cabrito como finalizado.
+        // Faz com que o puxador saiba que o seu cabrito cadastrado foi desmanxado
         Cabrito cabrito = this.desmanx.getCabrito();
         cabrito.setDesmanxFinalizado(true);
         ManagerDao.getInstance().update(cabrito);
@@ -107,5 +85,21 @@ public class DesmanxController {
 
     public List<Desmanx> readAll() {
         return ManagerDao.getInstance().read("SELECT d FROM Desmanx d", Desmanx.class);
+    }
+
+    public Desmanx getDesmanx() {
+        return desmanx;
+    }
+
+    public void setDesmanx(Desmanx desmanx) {
+        this.desmanx = desmanx;
+    }
+
+    public Desmanx getSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(Desmanx selecionado) {
+        this.selecionado = selecionado;
     }
 }

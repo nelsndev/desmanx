@@ -20,14 +20,6 @@ public class LoginController {
         this.puxadorLogado = null;
     }
 
-    public Puxador getPuxadorLogado() {
-        return puxadorLogado;
-    }
-
-    public void setPuxadorLogado(Puxador puxadorLogado) {
-        this.puxadorLogado = puxadorLogado;
-    }
-
     public String loga(String login, String senha) {
         String query = String.format(
             "SELECT p FROM Puxador p WHERE p.codinome = '%s' AND p.senha = '%s'", login, senha);
@@ -46,5 +38,13 @@ public class LoginController {
 
     public void desloga() {
         this.puxadorLogado = null;
+    }
+
+    public Puxador getPuxadorLogado() {
+        return puxadorLogado;
+    }
+
+    public void setPuxadorLogado(Puxador puxadorLogado) {
+        this.puxadorLogado = puxadorLogado;
     }
 }

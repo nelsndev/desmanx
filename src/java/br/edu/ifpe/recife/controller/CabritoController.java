@@ -24,22 +24,6 @@ public class CabritoController {
         this.selecionado = null;
     }
 
-    public Cabrito getCabrito() {
-        return cabrito;
-    }
-
-    public void setCabrito(Cabrito cabrito) {
-        this.cabrito = cabrito;
-    }
-
-    public Cabrito getSelecionado() {
-        return selecionado;
-    }
-
-    public void setSelecionado(Cabrito selecionado) {
-        this.selecionado = selecionado;
-    }
-
     public void create(Puxador puxador) {
         this.cabrito.setPuxador(puxador);
         this.cabrito.setDesmanxFinalizado(false);
@@ -76,5 +60,21 @@ public class CabritoController {
 
     public List<Cabrito> readAll() {
         return ManagerDao.getInstance().read("SELECT c FROM Cabrito c", Cabrito.class);
+    }
+
+    public Cabrito getCabrito() {
+        return cabrito;
+    }
+
+    public void setCabrito(Cabrito cabrito) {
+        this.cabrito = cabrito;
+    }
+
+    public Cabrito getSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(Cabrito selecionado) {
+        this.selecionado = selecionado;
     }
 }

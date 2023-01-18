@@ -23,22 +23,6 @@ public class ModeloController {
         this.selecionado = null;
     }
 
-    public Modelo getModelo() {
-        return modelo;
-    }
-
-    public Modelo getSelecionado() {
-        return selecionado;
-    }
-
-    public void setSelecionado(Modelo selecionado) {
-        this.selecionado = selecionado;
-    }
-
-    public void setModelo(Modelo modelo) {
-        this.modelo = modelo;
-    }
-
     public void create(List<Peca> pecas) {
         this.modelo.setPecas(pecas);
         ManagerDao.getInstance().create(this.modelo);
@@ -61,5 +45,21 @@ public class ModeloController {
 
     public List<Modelo> readAll() {
         return ManagerDao.getInstance().read("SELECT m FROM Modelo m", Modelo.class);
+    }
+
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public Modelo getSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(Modelo selecionado) {
+        this.selecionado = selecionado;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
     }
 }

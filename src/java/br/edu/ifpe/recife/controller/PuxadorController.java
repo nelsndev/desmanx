@@ -23,22 +23,6 @@ public class PuxadorController {
         this.selecionado = null;
     }
 
-    public Puxador getPuxador() {
-        return puxador;
-    }
-
-    public Puxador getSelecionado() {
-        return selecionado;
-    }
-
-    public void setSelecionado(Puxador selecionado) {
-        this.selecionado = selecionado;
-    }
-
-    public void setPuxador(Puxador puxador) {
-        this.puxador = puxador;
-    }
-
     public void create(String confirmacao) {
         if (!this.puxador.getSenha().equals(confirmacao)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
@@ -102,5 +86,21 @@ public class PuxadorController {
 
     public List<Puxador> readAll() {
         return ManagerDao.getInstance().read("SELECT p FROM Puxador p", Puxador.class);
+    }
+
+    public Puxador getPuxador() {
+        return puxador;
+    }
+
+    public Puxador getSelecionado() {
+        return selecionado;
+    }
+
+    public void setSelecionado(Puxador selecionado) {
+        this.selecionado = selecionado;
+    }
+
+    public void setPuxador(Puxador puxador) {
+        this.puxador = puxador;
     }
 }

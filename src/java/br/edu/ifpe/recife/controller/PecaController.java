@@ -26,30 +26,6 @@ public class PecaController {
         this.pecas = new DualListModel<>();
     }
 
-    public Peca getPeca() {
-        return peca;
-    }
-
-    public void setPeca(Peca peca) {
-        this.peca = peca;
-    }
-
-    public Peca getSelecionada() {
-        return selecionada;
-    }
-
-    public void setSelecionada(Peca selecionada) {
-        this.selecionada = selecionada;
-    }
-
-    public DualListModel<Peca> getPecas() {
-        return pecas;
-    }
-
-    public void setPecas(DualListModel<Peca> pecas) {
-        this.pecas = pecas;
-    }
-
     public void atualizaListaPecas() {
         List<Peca> pecasSource = readAll();
         pecasSource.sort((a, b) -> a.getNome().compareTo(b.getNome()));
@@ -77,5 +53,29 @@ public class PecaController {
 
     public List<Peca> readAll() {
         return ManagerDao.getInstance().read("SELECT p FROM Peca p", Peca.class);
+    }
+
+    public Peca getPeca() {
+        return peca;
+    }
+
+    public void setPeca(Peca peca) {
+        this.peca = peca;
+    }
+
+    public Peca getSelecionada() {
+        return selecionada;
+    }
+
+    public void setSelecionada(Peca selecionada) {
+        this.selecionada = selecionada;
+    }
+
+    public DualListModel<Peca> getPecas() {
+        return pecas;
+    }
+
+    public void setPecas(DualListModel<Peca> pecas) {
+        this.pecas = pecas;
     }
 }
