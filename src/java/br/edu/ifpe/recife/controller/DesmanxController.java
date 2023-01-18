@@ -3,6 +3,7 @@ package br.edu.ifpe.recife.controller;
 import br.edu.ifpe.recife.model.dao.ManagerDao;
 import br.edu.ifpe.recife.model.negocio.Cabrito;
 import br.edu.ifpe.recife.model.negocio.Desmanx;
+import br.edu.ifpe.recife.model.negocio.Desmanx_;
 import br.edu.ifpe.recife.model.negocio.ItemPeca;
 import br.edu.ifpe.recife.model.negocio.Peca;
 import java.util.ArrayList;
@@ -39,16 +40,7 @@ public class DesmanxController {
     }
 
     public void create() {
-        List<ItemPeca> ItemPecaList = this.desmanx.getItensPeca();
-        int itensAusentesCount = 0;
-
-        for (ItemPeca itemPeca : ItemPecaList) {
-            if (itemPeca.getQuantidade() == null || itemPeca.getQuantidade() <= 0) {
-                itemPeca.setQuantidade(0);
-                itensAusentesCount++;
-            }
-        }
-        if (itensAusentesCount == ItemPecaList.size()) {
+        if (isItemPecaListEmpty(this.desmanx.getItensPeca())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "Não pode haver desmanx sem peças!", ""));
             return;
@@ -66,7 +58,28 @@ public class DesmanxController {
         this.desmanx = new Desmanx();
     }
 
+    /*
+     * A lista de ItemPeca é considerada vazia quando o campo 'quantidade' de TODOS os seus itens
+     * for igual a zero.
+     */
+    private boolean isItemPecaListEmpty(List<ItemPeca> list) {
+        int itensAusentesCount = 0;
+        for (ItemPeca ip : list) {
+            if (ip.getQuantidade() == null || ip.getQuantidade() <= 0) {
+                ip.setQuantidade(0);
+                itensAusentesCount++;
+            }
+        }
+        return itensAusentesCount == list.size();
+    }
+
     public void update() {
+        if (isItemPecaListEmpty(this.selecionado.getItensPeca())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "Não pode haver desmanx sem peças!", ""));
+            return;
+        }
+
         ManagerDao.getInstance().update(this.selecionado);
         FacesContext.getCurrentInstance()
             .addMessage(null, new FacesMessage("Desmanx alterado com sucesso!"));
