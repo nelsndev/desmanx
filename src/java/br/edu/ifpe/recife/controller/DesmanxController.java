@@ -38,11 +38,6 @@ public class DesmanxController {
         this.desmanx.setItensPeca(itemPecaList);
     }
 
-    public List<Desmanx> readAllOrderByDate() {
-        return ManagerDao.getInstance().read(
-            "SELECT d FROM Desmanx d ORDER BY d.dataDesmanx DESC", Desmanx.class);
-    }
-
     public void create() {
         List<ItemPeca> ItemPecaList = this.desmanx.getItensPeca();
         int itensAusentesCount = 0;
@@ -59,7 +54,7 @@ public class DesmanxController {
             return;
         }
 
-        // Faz com que o puxador saiba que o seu cabrito cadastrado foi desmanxado
+        // Faz com que o puxador saiba que o seu cabrito cadastrado foi finalizado (desmanxado)
         Cabrito cabrito = this.desmanx.getCabrito();
         cabrito.setDesmanxFinalizado(true);
         ManagerDao.getInstance().update(cabrito);
@@ -85,6 +80,11 @@ public class DesmanxController {
 
     public List<Desmanx> readAll() {
         return ManagerDao.getInstance().read("SELECT d FROM Desmanx d", Desmanx.class);
+    }
+
+    public List<Desmanx> readAllOrderByDate() {
+        return ManagerDao.getInstance().read(
+            "SELECT d FROM Desmanx d ORDER BY d.dataDesmanx DESC", Desmanx.class);
     }
 
     public Desmanx getDesmanx() {
