@@ -34,18 +34,6 @@ public class CabritoController {
         this.cabrito = new Cabrito();
     }
 
-    public List<Cabrito> readAllByPuxador(Puxador puxador) {
-        String query = String.format("SELECT c FROM Cabrito c WHERE c.puxador.id = %s"
-            + " ORDER BY c.desmanxFinalizado, c.dataRoubo DESC", puxador.getId());
-        return ManagerDao.getInstance().read(query, Cabrito.class);
-    }
-
-    public List<Cabrito> readAllNotFinished() {
-        return ManagerDao.getInstance().read(
-            "SELECT c FROM Cabrito c WHERE c.desmanxFinalizado = false ORDER BY c.dataRoubo DESC",
-            Cabrito.class);
-    }
-
     public void update() {
         ManagerDao.getInstance().update(this.selecionado);
         FacesContext.getCurrentInstance()
@@ -60,6 +48,18 @@ public class CabritoController {
 
     public List<Cabrito> readAll() {
         return ManagerDao.getInstance().read("SELECT c FROM Cabrito c", Cabrito.class);
+    }
+
+    public List<Cabrito> readAllNotFinished() {
+        return ManagerDao.getInstance().read(
+            "SELECT c FROM Cabrito c WHERE c.desmanxFinalizado = false ORDER BY c.dataRoubo DESC",
+            Cabrito.class);
+    }
+
+    public List<Cabrito> readAllByPuxador(Puxador puxador) {
+        String query = String.format("SELECT c FROM Cabrito c WHERE c.puxador.id = %s"
+            + " ORDER BY c.desmanxFinalizado, c.dataRoubo DESC", puxador.getId());
+        return ManagerDao.getInstance().read(query, Cabrito.class);
     }
 
     public Cabrito getCabrito() {
