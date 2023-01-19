@@ -46,11 +46,7 @@ public class DesmanxController {
             return;
         }
 
-        // Faz com que o puxador saiba que o seu cabrito cadastrado foi finalizado (desmanxado)
-        Cabrito cabrito = this.desmanx.getCabrito();
-        cabrito.setDesmanxFinalizado(true);
-        ManagerDao.getInstance().update(cabrito);
-
+        finalizaCabrito(this.desmanx.getCabrito());
         this.desmanx.setDataDesmanx(new Date());
         ManagerDao.getInstance().create(this.desmanx);
         FacesContext.getCurrentInstance()
@@ -59,8 +55,8 @@ public class DesmanxController {
     }
 
     /*
-     * A lista de ItemPeca é considerada vazia quando o campo 'quantidade' de TODOS os seus itens
-     * for igual a zero.
+     * A lista de ItemPeca é considerada vazia quando o valor do campo 'quantidade' de TODOS os seus
+     * itens for igual a zero.
      */
     private boolean isItemPecaListEmpty(List<ItemPeca> list) {
         int itensAusentesCount = 0;
@@ -71,6 +67,12 @@ public class DesmanxController {
             }
         }
         return itensAusentesCount == list.size();
+    }
+
+    // Faz com que o puxador saiba que o seu cabrito cadastrado foi desmanxado
+    private void finalizaCabrito(Cabrito c) {
+        c.setDesmanxFinalizado(true);
+        ManagerDao.getInstance().update(c);
     }
 
     public void update() {
